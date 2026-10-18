@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PULSAR · Sistema personal</title>
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#19283d;background:#f3f6fa}*{box-sizing:border-box}body{margin:0;zoom:80%}header{background:#172a44;color:#fff;padding:21px max(20px,calc((100vw - 1160px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}header h1{font-size:23px;margin:0}header small{opacity:.75}main{max-width:1160px;margin:25px auto;padding:0 16px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:17px}.tabs button{background:white;color:#23415f;border:1px solid #d1dbe6}.tabs button.active{background:#22558c;color:white}.panel{background:#fff;border:1px solid #dce3ea;border-radius:13px;padding:22px;box-shadow:0 3px 16px #172a4409;margin-bottom:18px}h2{font-size:21px;margin:0 0 8px}h3{font-size:16px}p.help{color:#64748b;font-size:13px;margin:4px 0 17px}label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}input,textarea,select{width:100%;padding:11px;border:1px solid #bac9d9;border-radius:8px;font:inherit;background:white;color:#23354b}textarea{min-height:104px;resize:vertical;line-height:1.5}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 17px}.wide{grid-column:1/-1}button{cursor:pointer;border:0;padding:10px 15px;border-radius:8px;background:#22558c;color:white;font-size:14px;font-weight:600}button:hover{filter:brightness(.95)}button.secondary{background:#e9f0f7;color:#23415f}button.danger{background:#fff0f0;color:#a32232}button.outline{border:1px solid #aab9cb;background:#fff;color:#22558c}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}.hidden{display:none!important}.status{font-size:13px;color:#16704b;min-height:21px;margin-top:8px}.pill{font-size:12px;background:#ebf1f8;padding:5px 8px;border-radius:6px;color:#425c77}.library-item{padding:13px;border:1px solid #d7e0e9;border-radius:9px;margin:9px 0}.library-item strong{display:block;margin-bottom:5px}.library-item p{white-space:pre-wrap;color:#526277;font-size:13px;margin:6px 0}.muted{color:#607087}.counter{font-size:12px;color:#64748b;text-align:right}footer{text-align:center;color:#7a889c;font-size:12px;padding:12px 18px 30px}@media(max-width:650px){.grid{grid-template-columns:1fr}header{padding:18px}header h1{font-size:20px}.panel{padding:15px}}
+.main-menu{display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap}.main-menu button{background:#dfe9f3;color:#23415f;border:1px solid #c6d5e5;font-size:15px;padding:13px 18px}.main-menu button.active{background:#172a44;color:white}.section-heading{display:flex;align-items:start;justify-content:space-between;gap:15px;flex-wrap:wrap}.section-heading .actions{margin-top:0}.stats{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.stats span{background:#eff5fc;color:#274d74;border-radius:8px;padding:9px 13px;font-size:13px}.stats strong{font-size:17px}.table-scroll{overflow-x:auto;margin-top:15px}.people-table{width:100%;border-collapse:collapse;font-size:13px;min-width:900px}.people-table th,.people-table td{border-bottom:1px solid #e3e9f0;padding:11px 9px;text-align:left;vertical-align:top}.people-table th{background:#f1f5fa;color:#344c65}.people-table tbody tr:hover{background:#f8fbff}.people-table button{padding:7px 11px;font-size:12px}.people-table a{color:#22558c}.tag{display:inline-block;padding:4px 7px;background:#edf3f8;border-radius:6px;white-space:nowrap}.nowrap{white-space:nowrap}
+/* Editor visual no destructivo: PULSAR 1.3 */
+.pulsar-version{display:flex;align-items:flex-end;flex-direction:column;gap:7px}.pulsar-version #viewModeToggle{padding:5px 9px;background:#2c4665;color:white;border:1px solid #7990a9;font-size:12px}.pulsar-editor{border:2px solid #92a9c6}.pulsar-editor .editor-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.editor-list{max-height:410px;overflow:auto;border:1px solid #d5e0eb;border-radius:8px;margin-top:12px}.editor-row{width:100%;display:flex;gap:10px;justify-content:space-between;align-items:center;text-align:left;background:white;color:#243f60;border-radius:0;border-bottom:1px solid #e4ebf3;font-weight:400;padding:10px}.editor-row:hover,.editor-row.selected{background:#eaf2fb}.editor-row .editor-meta{font-size:11px;color:#61738b;display:block;margin-top:3px}.editor-row .edited-indicator{color:#1c7855;font-size:11px;white-space:nowrap}.editor-layout{display:grid;grid-template-columns:minmax(260px,1fr) minmax(290px,1fr);gap:18px}.editor-help{font-size:12px;color:#687890}.editor-tag{font-size:11px;color:#607590}.editor-target{outline:2px dashed #c3984e!important;outline-offset:2px;cursor:text!important}.editor-target:hover{outline:2px solid #2875b6!important;background:#fff8e7!important}.editor-focus{outline:3px solid #2b72ac!important;outline-offset:3px}.editor-settings{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.editor-settings select,.editor-settings input{min-width:140px;flex:1}.editor-pane textarea{min-height:100px}.editor-pane .actions{margin-top:8px}#editorStatus{margin-top:7px}.editor-pane{border:1px solid #d9e5f0;border-radius:9px;padding:12px;background:#fafcff}body.pulsar-programming header{position:relative}@media(max-width:850px){.editor-layout{grid-template-columns:1fr}}@media(max-width:650px){.pulsar-version #viewModeToggle{font-size:11px}}
+.correo-restore{background:#efe4ff;color:#694196;border:1px solid #c9afe5}.correo-restore:hover{background:#e4d4fc}
+</style><style id="correoPlantillasStyle">.correo-template-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:10px 0}.correo-template-header h3{margin:0}.correo-template-body{min-height:185px;white-space:pre-wrap;font-family:Arial,Helvetica,sans-serif}.correo-template-header button{white-space:nowrap}</style><style id="dmStyle">.dm-editor{min-height:260px;border:1px solid #bac9d9;border-radius:8px;background:#fff;padding:18px;line-height:1.55;font-family:Arial,sans-serif;font-size:14px;color:#23354b}.dm-editor p{margin:0 0 14px;text-align:justify}.dm-editor .encabezado-editor p{text-align:left}.dm-editor table{border-collapse:collapse;width:100%;margin:12px 0 18px;table-layout:fixed}.dm-editor th,.dm-editor td{border:1px solid #333;padding:7px 5px;text-align:center;word-break:break-word}.dm-editor th{font-size:12px;background:#edf1f5}.dm-editor td{height:36px}.dm-editor:empty:before{content:'Completa los campos y pulsa Generar texto y tabla.';color:#7a889c}.encabezado-editor table,.encabezado-editor td{border:0!important;text-align:left!important;word-break:normal!important;table-layout:auto!important;padding:0!important}.encabezado-editor td{height:auto!important}.encabezado-editor table{margin:0!important}.encabezado-editor div{margin:0!important}.dm-editor>p{text-align:justify}</style></head><body>
+<header><div><h1>✦ PULSAR</h1><small>Mi espacio de trabajo · Drive requiere conexión</small></div><div class="pulsar-version"><span class="pill">Versión 2.7 · HTTPS</span><button id="viewModeToggle" type="button" title="Cambiar entre vista final y programación" aria-label="Cambiar vista" aria-expanded="false">👁 <span id="viewModeName">Vista final</span></button></div></header>
+<main>
+<section id="pulsarVisualEditor" class="panel pulsar-editor hidden" aria-label="Vista programación y editor visual">
+<div class="editor-bar"><div><h2>👁 Vista programación · Editor visual</h2><p class="help">Edita los textos de la interfaz sin modificar la programación ni los datos del personal. Haz clic sobre un texto resaltado en la página o selecciónalo aquí.</p></div><button type="button" id="editorClose" class="secondary">✓ Volver a vista final</button></div>
+<div class="editor-settings"><input id="editorSearch" type="search" placeholder="Buscar texto, botón o campo..." aria-label="Buscar textos"><select id="editorModule" aria-label="Filtrar sección"><option value="todos">Todas las secciones</option><option value="general">General y menú</option><option value="documental">Documental</option><option value="personal">Personal ESST</option><option value="respaldo">Respaldos</option></select><select id="editorType" aria-label="Filtrar tipo"><option value="todos">Todos los tipos</option><option value="Texto">Textos y títulos</option><option value="Botón">Botones</option><option value="Campo">Etiquetas</option><option value="Ayuda">Ayuda</option><option value="Opción">Opciones desplegables</option><option value="Ejemplo">Ejemplos (placeholder)</option></select></div>
+<div class="editor-layout"><div><div class="editor-bar"><strong id="editorCount">0 textos</strong><small class="editor-help">Selecciona un elemento</small></div><div class="editor-list" id="editorList"></div></div><div class="editor-pane"><div id="editorNoSelection" class="editor-help">Selecciona un texto de la lista para editarlo.</div><div id="editorSelectedPanel" class="hidden"><strong id="editorSelectedTitle"></strong><div id="editorSelectedInfo" class="editor-tag"></div><label for="editorOriginal">Texto original</label><textarea id="editorOriginal" readonly></textarea><label for="editorNewText">Tu texto personalizado</label><textarea id="editorNewText" placeholder="Escribe el nuevo texto visible..."></textarea><div class="actions"><button id="editorSave" type="button">Guardar texto</button><button id="editorReset" type="button" class="secondary">Restaurar original</button></div></div><div class="status" id="editorStatus" role="status"></div></div></div>
+<details style="margin-top:14px"><summary style="cursor:pointer;color:#526d8a;font-size:13px">Opciones avanzadas del editor y seguridad</summary><p class="editor-help">Los cambios se guardan solo como personalizaciones de texto en este Chrome, no modifican el código fuente ni los datos de PULSAR. No cambies los nombres de las opciones esperando modificar sus filtros: solo cambia cómo se ven.</p><div class="actions"><button id="editorExport" type="button" class="secondary">Exportar textos personalizados (JSON)</button><button id="editorImportBtn" type="button" class="outline">Importar textos (JSON)</button><input id="editorImportFile" type="file" accept=".json,application/json" class="hidden"><button id="editorResetAll" type="button" class="danger">Restaurar todos los textos</button></div></details>
+</section>
+<nav class="main-menu" aria-label="Secciones de PULSAR"><button class="active" data-module="documental">📄 SGD</button><button data-module="correo">✉️ Correo</button><button data-module="archivo">🗂️ Archivo documental</button><button data-module="personal">👥 Personal SCT</button><button data-module="configuracion">⚙️ Configuración</button></nav>
+<div id="mod-documental">
+<nav class="tabs"><button class="active" data-tab="redaccion">Redacción</button><button data-tab="generar">Generar prompt</button></nav>
+<section id="redaccion" class="panel">
+<h2>Redacción de documentos</h2>
+<p class="help">Selecciona el tipo de documento y su modelo. Completa los campos para generar un texto editable.</p>
+<div class="grid">
+<div><label for="redTipo">Tipo de documento</label><select id="redTipo"><option value="nota">Nota Informativa</option><option value="memorandum">Memorándum</option><option value="oficio">Oficio</option><option value="informe">Informe</option><option value="multiple">Memorándum Múltiple</option></select></div>
+<div><label for="redModelo">Seleccionar plantilla</label><select id="redModelo"><option value="inspecciones">Inspecciones</option></select></div>
+</div>
+<datalist id="pulsarOficinas"></datalist>
+<div id="redInspecciones">
+<h3>Inspecciones</h3>
+<p class="help">Indica el órgano y, si corresponde, la unidad orgánica donde se realizó la inspección. Si no existe unidad orgánica, deja ese campo vacío.</p>
+<div class="grid">
+<div><label for="redOrgano">Órgano</label><input id="redOrgano" placeholder="Ej.: Oficina General de Tecnologías de la Información"></div>
+<div><label for="redUnidad">Unidad orgánica (opcional)</label><input id="redUnidad" placeholder="Ej.: Oficina de Desarrollo Tecnológico"></div>
+</div></div>
+<div id="redDescanso" class="hidden" style="margin-top:12px">
+<h3>Licencia por enfermedad / maternidad — Memorándum</h3>
+<div class="grid">
+<div><label for="dmGenero">Servidor o servidora</label><select id="dmGenero"><option value="servidor">Servidor</option><option value="servidora">Servidora</option></select></div>
+<div><label for="dmNombre">Nombre completo</label><input id="dmNombre" placeholder="Nombres y apellidos"></div>
+<div><label for="dmCondicion">Condición laboral</label><select id="dmCondicion"><option value="CAS">CAS</option><option value="Nombrado">Nombrado</option></select></div>
+<div><label for="dmDireccion">Dirección general</label><input id="dmDireccion" list="pulsarOficinas" placeholder="Escribe para buscar la oficina"></div>
+<div><label for="dmLicencia">Tipo de licencia</label><select id="dmLicencia"><option value="licencia por enfermedad">Licencia por enfermedad</option><option value="licencia por maternidad">Licencia por maternidad</option></select></div>
+</div>
+<div class="actions"><button id="dmGenerar" type="button">Generar texto y tabla</button></div>
+<label>Vista previa editable del memorándum</label>
+<div id="dmResultado" class="dm-editor" contenteditable="true" aria-label="Resultado editable con tabla" spellcheck="true"></div>
+<div class="actions"><button type="button" id="dmCopiarWord">Copiar para Word (texto y tabla)</button><button type="button" id="dmLimpiar" class="secondary">Limpiar resultado</button></div>
+<div id="dmTituloPanel" style="margin-top:14px"><label for="dmTituloResultado">Título del memorándum</label><input id="dmTituloResultado" aria-label="Título editable del memorándum" placeholder="Se generará a partir del tipo de licencia y el nombre" style="font-weight:600"><div class="actions"><button type="button" id="dmCopiarTitulo" class="secondary">Copiar título</button></div></div>
+<p class="status" id="dmEstado" role="status"></p>
+</div>
+<div id="redLey30012" class="hidden" style="margin-top:12px">
+<h3>Ley N.° 30012 — Memorándum</h3>
+<div class="grid">
+<div><label for="leyGenero">Servidor o servidora</label><select id="leyGenero"><option value="servidor">Servidor</option><option value="servidora">Servidora</option></select></div>
+<div><label for="leyNombre">Nombres y apellidos</label><input id="leyNombre" placeholder="Nombres y apellidos"></div>
+<div><label for="leyCondicion">Condición laboral</label><select id="leyCondicion"><option value="CAS">CAS</option><option value="Nombrado">Nombrado</option></select></div>
+<div><label for="leyOficina">Oficina</label><input id="leyOficina" list="pulsarOficinas" placeholder="Escribe para buscar la oficina"></div>
+<div><label for="leyDias">Número de días</label><input id="leyDias" type="number" min="1" max="365" step="1" placeholder="Ej.: 02"></div>
+<div><label for="leyFecha">Fechas</label><input id="leyFecha" placeholder="Ej.: 22.01.2025 al 23.01.2025"><small class="muted">Formato: DD.MM.AAAA al DD.MM.AAAA</small></div>
+</div>
+<div class="actions"><button type="button" id="leyGenerar">Generar texto y tabla</button></div>
+<label>Vista previa editable del memorándum</label>
+<div id="leyResultado" class="dm-editor" contenteditable="true" aria-label="Resultado editable Ley 30012 con tabla" spellcheck="true"></div>
+<div class="actions"><button type="button" id="leyCopiarWord">Copiar para Word (texto y tabla)</button><button type="button" id="leyLimpiar" class="secondary">Limpiar resultado</button></div>
+<div id="leyTituloPanel" style="margin-top:14px"><label for="leyTituloResultado">Título del memorándum</label><input id="leyTituloResultado" aria-label="Título editable Ley N.° 30012" placeholder="Se generará con el nombre del servidor" style="font-weight:600"><div class="actions"><button type="button" id="leyCopiarTitulo" class="secondary">Copiar título</button></div></div>
+<p class="status" id="leyEstado" role="status"></p>
+</div>
+<p id="redSinModelo" class="help hidden">Todavía no se ha incorporado una plantilla para este tipo de documento.</p>
+<div class="actions"><button id="redGenerar" type="button">Generar texto</button></div>
+<label for="redResultado">Texto generado (editable)</label><textarea id="redResultado" style="min-height:330px" placeholder="El texto de la plantilla aparecerá aquí cuando pulses Generar texto."></textarea>
+<div class="actions"><button id="redCopiar" type="button">Copiar texto</button><button id="redRestaurar" type="button" class="secondary">Restaurar texto generado</button></div>
+<div class="status" id="redEstado" aria-live="polite"></div>
+<div id="redProyectoSeccion" class="panel" style="margin-top:20px;background:#f8fbff;border-color:#cfdeed">
+<h3>Proyecto de Nota Informativa · Inspecciones</h3>
+<label style="display:flex;align-items:center;gap:9px;font-size:14px"><input id="redRequiereProyecto" type="checkbox" style="width:auto"> Requiere proyecto</label>
+<div id="redProyectoCampos" class="hidden">
+<h3>Encabezado</h3>
+<p class="help">Elige una oficina de la lista o escribe una distinta. PULSAR completa el nombre y cargo cuando está en el directorio.</p>
+<div class="grid"><div><label for="redPara">PARA</label><input id="redPara" list="redOficinasOpciones" autocomplete="off" placeholder="Buscar órgano o unidad orgánica"></div>
+<div><label for="redDe">DE</label><input id="redDe" list="redOficinasOpciones" autocomplete="off" placeholder="Buscar órgano o unidad orgánica"></div></div>
+<datalist id="redOficinasOpciones"></datalist>
+<div class="actions"><button id="redEncabezadoGenerar" type="button">Generar encabezado</button></div>
+<label for="redEncabezadoResultado">Encabezado (editable)</label><div id="redEncabezadoResultado" class="dm-editor encabezado-editor" contenteditable="true" role="textbox" aria-label="Encabezado editable" style="min-height:170px"></div>
+<div class="actions"><button type="button" id="redEncabezadoCopiar" class="secondary">Copiar texto</button></div>
+<h3>Referencia</h3>
+<div class="grid"><div><label for="redRefTipo">Documento</label><select id="redRefTipo"><option value="Informe">Informe</option><option value="Nota Informativa">Nota Informativa</option><option value="Memorándum">Memorándum</option></select></div>
+<div><label for="redRefNumero">Número de documento</label><input id="redRefNumero" placeholder="Número completo del documento"></div></div>
+<div class="actions"><button type="button" id="redRefAgregar" class="secondary">+ Agregar documento</button></div>
+<div id="redReferenciasLista"></div>
+<label for="redReferenciaResultado">Referencia (editable)</label><textarea id="redReferenciaResultado" style="min-height:120px" placeholder="Referencia:
+a) INFORME N.° ..."></textarea>
+<div class="actions"><button type="button" id="redReferenciaCopiar" class="secondary">Copiar texto</button></div>
+<label style="display:flex;align-items:center;gap:9px;font-size:14px"><input type="checkbox" id="redConCopia" style="width:auto"> Con copia (CC)</label>
+<div id="redCCPanel" class="hidden"><div id="redCCLista"></div><div class="actions"><button type="button" id="redCCAgregar" class="secondary">+ Agregar dirección en copia</button></div></div>
+<div class="actions"><button type="button" id="redProyectoGenerar">Generar proyecto</button></div>
+<label for="redProyectoResultado">Cuerpo del proyecto (editable)</label><textarea id="redProyectoResultado" style="min-height:370px" placeholder="Tengo el agrado de dirigirme a usted..."></textarea>
+<div class="actions"><button type="button" id="redProyectoCopiar">Copiar cuerpo</button><button type="button" id="redProyectoRestaurar" class="secondary">Restaurar proyecto generado</button></div><div class="status" id="redProyectoEstado" aria-live="polite"></div>
+</div></div>
+</section>
+<section id="generar" class="panel hidden">
+<h2>Preparar instrucciones para ChatGPT</h2>
+<label for="promptModo">Seleccionar prompt</label>
+<select id="promptModo"><option value="especialista">Revisión de documento especialista</option><option value="general">Generador de prompt general (anterior)</option></select>
+<div id="promptEspecialista" class="panel" style="margin-top:16px;background:#f9fbfd">
+<div class="grid">
+<div><label for="espTipoDoc">Tipo de documento</label><select id="espTipoDoc"><option>Informe</option><option>Nota Informativa</option><option>Memorándum</option><option>Oficio</option><option value="otro">Otro (escribir)</option></select></div>
+<div><label for="espNumeroDoc">Número de documento</label><input id="espNumeroDoc" placeholder="Ej.: N.° 001-2026-ESST"></div>
+<div id="espOtroDocWrap" class="wide hidden"><label for="espOtroDoc">Otro tipo de documento</label><input id="espOtroDoc" placeholder="Especificar tipo de documento"></div>
+<div class="wide"><label for="espCargo">Especialista que emite el documento</label><select id="espCargo"><option>Especialista de Seguridad y Salud en el Trabajo</option><option>Médico de Salud Ocupacional</option><option>Especialista en Salud Ocupacional</option><option value="otro">Otro cargo (escribir)</option></select></div>
+<div id="espOtroCargoWrap" class="wide hidden"><label for="espOtroCargo">Especificar cargo</label><input id="espOtroCargo" placeholder="Cargo del especialista"></div>
+<div class="wide"><label for="espOficina">Oficina destinataria final</label><input id="espOficina" placeholder="Ej.: Oficina de Administración de Recursos Humanos"></div>
+<div class="wide" style="margin-top:12px"><label style="display:flex;align-items:center;gap:10px"><input type="checkbox" id="espPrevio" style="width:auto"> ¿Es respuesta a documento previo?</label></div>
+<div id="espPrevioWrap" class="wide hidden" style="padding:13px;border:1px solid #d7e0e9;border-radius:9px;margin-top:7px">
+<h3>Documentos previos de referencia</h3>
+<div class="grid"><div><label for="espPrevTipo">Tipo de documento</label><select id="espPrevTipo"><option>Memorándum</option><option>Memorándum Múltiple</option><option>Nota Informativa</option><option>Informe</option><option>Oficio</option><option>Carta</option><option value="otro">Otro</option></select></div><div><label for="espPrevNumero">Número de documento</label><input id="espPrevNumero" placeholder="N.° ..."></div><div id="espPrevOtroWrap" class="wide hidden"><label for="espPrevOtro">Otro tipo de documento</label><input id="espPrevOtro"></div></div>
+<div class="actions"><button type="button" id="espPrevAgregar" class="secondary">Agregar documento</button></div>
+<div id="espPrevLista" class="library-item" aria-live="polite"></div>
+</div>
+</div>
+
+<div class="actions"><button type="button" id="espGenerar">Generar prompt</button><button type="button" class="secondary" id="espLimpiar">Limpiar campos</button></div>
+</div>
+<div id="promptGeneral" class="hidden"><p class="help">Generador general existente; se conserva sin modificaciones.</p>
+<div class="grid">
+<div><label for="tipo">Tipo de documento</label><select id="tipo"></select></div>
+<div><label for="destino">Oficina destinataria</label><select id="destino"><option>ODRH</option><option>OGGRH</option><option>OARH</option><option>OGA</option><option>Secretaría General</option><option>Otra</option></select></div>
+<div id="otraWrap" class="wide hidden"><label for="otra">Indica la oficina destinataria</label><input id="otra"></div>
+<div><label for="asunto">Asunto</label><input id="asunto" placeholder="Ej.: Participación en actividad institucional"></div>
+<div><label for="referencia">Documento(s) de referencia</label><input id="referencia" placeholder="Ej.: Memorando N.° [...]"></div>
+<div class="wide"><label for="antecedente">¿Quién solicita y qué solicita?</label><textarea id="antecedente" placeholder="Escribe quién remite el documento, qué requiere y cualquier fecha o precisión relevante."></textarea></div>
+<div class="wide"><label for="indicaciones">¿Qué se debe informar o solicitar en la respuesta?</label><textarea id="indicaciones" placeholder="Ej.: Confirmar participación de una servidora y solicitar traslado a la oficina competente."></textarea></div>
+<div><label for="tono">Extensión de la redacción</label><select id="tono"><option value="breve">Breve y directa</option><option value="media">Moderada</option><option value="detallada">Detallada</option></select></div>
+<div><label for="textoSelect">Insertar texto frecuente (opcional)</label><select id="textoSelect"><option value="">Ninguno</option></select></div>
+<div class="wide"><label for="adicional">Otras instrucciones (opcional)</label><textarea id="adicional" style="min-height:78px" placeholder="Ej.: Precisar que se remite proyecto de oficio para su atención."></textarea></div>
+</div>
+<div class="actions"><button id="generarBtn">Generar prompt</button><button id="limpiarBtn" class="secondary">Limpiar campos</button></div>
+</div>
+<div id="resultadoWrap" class="hidden"><label for="resultado">Prompt generado (editable antes de copiar)</label><textarea id="resultado" style="min-height:310px"></textarea><div class="counter" id="contador"></div><div class="actions"><button id="copiarBtn">Copiar prompt</button><button id="descargarBtn" class="secondary">Guardar como TXT</button></div><div class="status" id="estado"></div></div>
+</section>
+<section id="plantillas" class="panel hidden"><h2>Mis plantillas</h2><p class="help">Puedes editar las instrucciones de cada documento o agregar nuevos tipos. Estas instrucciones se incorporan al prompt generado.</p><div class="grid"><div><label for="plantillaSelect">Selecciona una plantilla</label><select id="plantillaSelect"></select></div><div><label for="plantillaNombre">Nombre de la plantilla</label><input id="plantillaNombre"></div><div class="wide"><label for="plantillaTexto">Instrucciones y estructura</label><textarea id="plantillaTexto" style="min-height:260px"></textarea></div></div><div class="actions"><button id="guardarPlantilla">Guardar cambios</button><button id="nuevaPlantilla" class="secondary">Nueva plantilla</button><button id="eliminarPlantilla" class="danger">Eliminar plantilla</button></div><div class="status" id="plantillaEstado"></div></section>
+<section id="textos" class="panel hidden"><h2>Banco de textos</h2><p class="help">Guarda frases, cierres e instrucciones que utilizas habitualmente. Selecciona un texto en el generador para incluirlo en tu solicitud.</p><div class="grid"><div><label for="textoNombre">Nombre / categoría</label><input id="textoNombre" placeholder="Ej.: Cierre institucional"></div><div class="wide"><label for="textoContenido">Contenido</label><textarea id="textoContenido"></textarea></div></div><div class="actions"><button id="guardarTexto">Guardar texto</button><button class="secondary" id="cancelarTexto">Limpiar editor</button></div><div id="listadoTextos"></div><div class="status" id="textoEstado"></div></section>
+
+</div>
+<section id="mod-archivo" class="hidden">
+<div class="panel">
+<div class="section-heading"><div><h2>Archivo documental</h2><p class="help">Consulta de notas informativas, memorándums y otros documentos. Conecta tu cuenta de Google para buscar archivos autorizados en TDOCUMENTOS y sus subcarpetas.</p></div><div class="actions"><button id="archivoAbrirCarpeta" type="button" class="secondary">Abrir carpeta en Drive ↗</button></div></div>
+<div class="library-item" style="background:#f8fbff">
+  <h3 style="margin:0 0 6px">Conexión con Google Drive</h3>
+  <p class="help">Pega tu ID de cliente OAuth de Google Cloud (termina en <code>.apps.googleusercontent.com</code>). Se guarda solo este identificador público en el navegador. Tu contraseña y el token de acceso no se guardan.</p>
+  <div class="grid"><div class="wide"><label for="archivoClientId">ID de cliente OAuth</label><input id="archivoClientId" autocomplete="off" spellcheck="false" placeholder="123456...apps.googleusercontent.com"></div></div>
+  <div class="actions"><button id="archivoConectar" type="button">Conectar con Google Drive</button><button id="archivoDesconectar" type="button" class="secondary">Desconectar</button></div>
+  <div id="archivoConexionEstado" class="status" role="status" aria-live="polite">Sin conexión. Usa http://localhost:8000/PULSAR.html para probar.</div>
+</div>
+<div class="grid">
+<div class="wide"><label for="archivoConsulta">Buscar documento</label><input id="archivoConsulta" type="search" placeholder="Nombre, número de documento, asunto o texto del contenido"></div>
+<div><label for="archivoAnio">Año</label><select id="archivoAnio"><option value="">Todos los años</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option></select></div>
+<div><label for="archivoTipo">Tipo de documento</label><select id="archivoTipo"><option value="">Todos los tipos</option><option>Nota Informativa</option><option>Memorándum</option><option>Oficio</option><option>Informe</option><option>Otro</option></select></div>
+</div>
+<div class="actions"><button id="archivoBuscar" type="button">Buscar documentos</button><button id="archivoLimpiar" type="button" class="secondary">Limpiar filtros</button></div>
+<div id="archivoEstado" class="status" role="status" aria-live="polite"></div>
+<div id="archivoResultados" class="library-item" style="margin-top:16px"><strong>Conexión pendiente</strong><p>Conecta tu cuenta para consultar los documentos de TDOCUMENTOS. La búsqueda de contenido dependerá de la indexación de Google Drive; algunos PDF escaneados y formatos pueden no ser localizables por su contenido.</p></div>
+</div>
+</section>
+<section id="mod-correo" class="hidden"><div class="panel">
+<h2>Correo</h2>
+<div class="correo-template-header"><h3>Plantillas</h3><button id="correoNueva" class="secondary" type="button">+ Nueva plantilla</button></div>
+<p class="help">Selecciona una plantilla, edita el mensaje si lo necesitas y cópialo para pegarlo en Outlook.</p>
+<div class="grid"><div class="wide"><label for="correoPlantilla">Seleccionar plantilla</label><select id="correoPlantilla"></select></div>
+<div id="correoDatosDocumento" class="wide"><div class="grid">
+<div><label for="correoTipoDocumento">Tipo de documento</label><select id="correoTipoDocumento">
+<option value="">Seleccionar tipo de documento</option>
+<option value="Nota Informativa" data-articulo="la">Nota Informativa</option>
+<option value="Memorandum" data-articulo="el">Memorandum</option>
+<option value="Memorandum Múltiple" data-articulo="el">Memorandum Múltiple</option>
+<option value="Oficio" data-articulo="el">Oficio</option>
+<option value="Oficio Múltiple" data-articulo="el">Oficio Múltiple</option>
+<option value="Carta" data-articulo="la">Carta</option>
+<option value="Informe" data-articulo="el">Informe</option>
+<option value="Resolución Ministerial" data-articulo="la">Resolución Ministerial</option>
+<option value="Resolución Directoral" data-articulo="la">Resolución Directoral</option>
+<option value="Resolución Secretarial" data-articulo="la">Resolución Secretarial</option>
+<option value="Solicitud" data-articulo="la">Solicitud</option>
+<option value="Circular" data-articulo="la">Circular</option>
+</select></div>
+<div><label for="correoNumeroDocumento">Número de documento</label><input id="correoNumeroDocumento" type="text" placeholder="Ej.: D000349-2026-OGGRH-MINSA" autocomplete="off"></div>
+</div><div class="actions"><button id="correoGenerar" type="button">Generar</button></div></div>
+<div id="correoDatosPrestaciones" class="wide hidden"><div class="grid">
+<div><label for="prestGenero">Servidor o servidora</label><select id="prestGenero"><option value="servidor">Servidor</option><option value="servidora">Servidora</option></select></div>
+<div><label for="prestNombre">Nombre completo</label><input id="prestNombre" placeholder="Nombre del servidor o servidora"></div>
+<div><label for="prestCondicion">Condición laboral</label><select id="prestCondicion"><option value="CAS">CAS</option><option value="Nombrado">Nombrado</option></select></div>
+<div><label for="prestOficina">Oficina</label><input id="prestOficina" list="pulsarOficinas" placeholder="Escribe para buscar la oficina"></div>
+<div><label for="prestLicencia">Tipo de licencia</label><select id="prestLicencia"><option value="licencia por enfermedad">Licencia por enfermedad</option><option value="licencia por maternidad">Licencia por maternidad</option></select></div>
+</div><div class="actions"><button id="prestGenerar" type="button">Generar</button></div></div>
+<div id="correoDatosPapeleta" class="wide hidden"><div class="grid">
+<div><label for="papCondicion">Condición laboral</label><select id="papCondicion"><option value="CAS">CAS</option><option value="NOMBRADO">Nombrado</option></select></div>
+<div><label for="papGenero">Servidor o servidora</label><select id="papGenero"><option value="servidor">Servidor</option><option value="servidora">Servidora</option></select></div>
+<div class="wide"><label for="papNombre">Nombre completo (personal ESST)</label><input id="papNombre" list="papNombres" placeholder="Escribe para buscar un nombre" autocomplete="off"><datalist id="papNombres"></datalist></div>
+<div><label for="papTipo">Documento a adjuntar</label><select id="papTipo"><option value="papeleta">Papeleta de autorización</option><option value="vacaciones">Formato de solicitud de vacaciones</option></select></div>
+<div><label for="papCantidad">Cantidad de documentos</label><input id="papCantidad" type="number" min="1" max="999" step="1" value="1" placeholder="01, 02, 03..."></div>
+</div><div class="actions"><button id="papGenerar" type="button">Generar texto</button></div></div>
+<div id="correoDatosConsulta" class="wide hidden"><div class="grid">
+<div><label for="correoTratamiento">Servidor o servidora</label><select id="correoTratamiento"><option value="servidor">Servidor</option><option value="servidora">Servidora</option></select></div>
+<div><label for="correoNombreServidor">Nombre completo</label><input id="correoNombreServidor" type="text" placeholder="Nombres y apellidos" autocomplete="off"></div>
+</div><div class="actions"><button id="correoGenerarConsulta" type="button">Generar</button></div></div>
+<div class="wide"><label for="correoMensaje">Texto del correo (editable)</label><textarea id="correoMensaje" class="correo-template-body" spellcheck="true"></textarea></div></div>
+<div class="actions"><button id="correoCopiar" type="button">Copiar para Outlook</button><button id="correoRestablecer" class="correo-restore" type="button">↺ Restaurar texto</button></div>
+<div id="correoEstado" class="status" role="status" aria-live="polite"></div>
+</div></section>
+<section id="mod-configuracion" class="hidden"><nav class="tabs" id="configTabs"><button type="button" class="active" data-cfg="config">Configuración y respaldo</button><button type="button" data-cfg="cfgDirectorioPanel">Órganos y unidades orgánicas</button></nav><section id="config" class="panel"><h2>Configuración y respaldo</h2><p class="help" style="color:#a34b16"><strong>Edición para HTTPS:</strong> el personal y directorio institucional no están incorporados en este HTML. Impórtalos solo cuando corresponda y tengas autorización. Los datos guardados en Chrome no se sincronizan entre dispositivos.</p><p class="help">Los datos de este navegador no se sincronizan automáticamente entre dispositivos. Se guardan localmente usando almacenamiento del dispositivo. Exporta copias de seguridad; el modo incógnito, limpiar datos del navegador o cambiar de equipo puede borrarlos.</p><label for="reglas">Reglas generales para todas las redacciones</label><textarea id="reglas" style="min-height:230px"></textarea><div class="actions"><button id="guardarReglas">Guardar reglas</button></div><div class="status" id="configEstado"></div><h3>Privacidad</h3><p class="help">Las funciones de Google Drive conectan con Google por internet; los otros módulos funcionan localmente. Tú decides qué copiar y pegar. Evita almacenar datos personales sensibles de expedientes reales y respalda tus plantillas periódicamente.</p></section>
+<section id="cfgDirectorioPanel" class="panel hidden"><h2>Órganos y unidades orgánicas</h2><p class="help">Directorio privado de oficinas. Impórtalo desde un CSV o JSON autorizado en cada navegador para completar PARA y DE en los proyectos de SGD. No se incluye en el HTML público.</p>
+<div class="section-heading"><div><strong id="orgContador"></strong></div><div class="actions"><button id="orgImportar" type="button" class="outline">Importar directorio CSV / JSON</button><input id="orgImportarArchivo" type="file" accept=".csv,.json,text/csv,application/json" class="hidden"><button id="orgExportar" type="button" class="secondary">Exportar directorio JSON</button><button id="orgNuevo" type="button" class="secondary">+ Agregar registro</button></div></div>
+<label for="orgBuscar">Buscar oficina, nombre o cargo</label><input id="orgBuscar" placeholder="Escribe para filtrar el directorio">
+<div style="overflow-x:auto;max-height:440px;overflow-y:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th>Oficina</th><th>Nombre</th><th>Cargo</th><th>Correo</th><th>Anexo</th><th>Acción</th></tr></thead><tbody id="orgFilas"></tbody></table></div>
+<div id="orgFormulario" class="hidden"><h3>Editar registro</h3><div class="grid"><div><label for="orgOficina">Oficina</label><input id="orgOficina"></div><div><label for="orgNombre">Nombre</label><input id="orgNombre"></div><div><label for="orgCargo">Cargo</label><input id="orgCargo"></div><div><label for="orgCorreo">Correo</label><input id="orgCorreo"></div><div><label for="orgAnexo">Anexo</label><input id="orgAnexo"></div></div><div class="actions"><button type="button" id="orgGuardar">Guardar registro</button><button type="button" id="orgCancelar" class="secondary">Cancelar</button></div></div><div class="status" id="orgEstado"></div></section></section>
+<section id="mod-personal" class="hidden">
+  <div class="panel">
+    <div class="section-heading"><div><h2>Directorio del personal ESST</h2></div><div class="actions"><button id="importExcelBtn" class="outline">Importar Excel</button><input id="importExcelFile" type="file" accept=".xlsx,.csv" class="hidden"><button id="exportExcelBtn" class="secondary">Exportar Excel</button><button id="addPerson" class="secondary">+ Añadir persona</button></div></div>
+    <div class="stats" id="personStats"></div>
+    <div class="grid"><div><label for="personSearch">Buscar por nombre, DNI, cargo o correo</label><input id="personSearch" placeholder="Buscar integrante..."></div><div><label for="personAreaFilter">Filtrar área</label><select id="personAreaFilter"><option value="todos">Todas las áreas</option><option value="ESST / Primer piso">ESST / Primer piso</option><option value="Salud Ocupacional">Salud Ocupacional</option><option value="Servicio Médico y Odontológico">Servicio Médico y Odontológico</option></select></div></div>
+    <div class="table-scroll"><table class="people-table"><thead><tr><th>Nombre y apellidos</th><th>DNI</th><th>Fecha de nacimiento</th><th>Puesto</th><th>Régimen laboral</th><th>Área</th><th>Correo electrónico</th><th>Acciones</th></tr></thead><tbody id="peopleRows"></tbody></table></div>
+    <p class="help">Los DNI se muestran parcialmente por privacidad. Puedes consultar el valor completo al editar cada registro.</p><div id="peopleStatus" class="status" role="status"></div>
+  </div>
+  <div class="panel"><h2>Correos masivos ESST</h2>
+   <div class="grid"><div><label for="mailPopulation">Personal incluido</label><select id="mailPopulation"><option value="servers">ESST servidores (CAS y nombrados)</option><option value="total">ESST total (incluye locadores)</option><option value="locators">Solo locadores / terceros</option></select></div><div><label for="mailArea">Área o equipo</label><select id="mailArea"><option value="todos">Todo el ESST</option><option value="ESST / Primer piso">ESST / Primer piso</option><option value="Salud Ocupacional">Salud Ocupacional</option><option value="Servicio Médico y Odontológico">Servicio Médico y Odontológico</option></select></div></div>
+   <div class="actions"><button id="generateMails">Generar destinatarios</button></div>
+   <div id="mailGroups" aria-live="polite"></div><div id="mailCount" class="counter"></div><div id="mailStatus" class="status" role="status"></div><textarea id="mailOutput" class="hidden" aria-label="Copia auxiliar de direcciones"></textarea>
+  </div>
+  <div id="personEditor" class="panel hidden"><h2 id="editorTitle">Agregar integrante</h2><div class="grid"><div><label for="pName">Nombre y apellidos</label><input id="pName"></div><div><label for="pDni">DNI</label><input id="pDni" inputmode="numeric" maxlength="12"></div><div><label for="pBirth">Fecha de nacimiento</label><input id="pBirth" placeholder="(Por completar) o DD/MM/AAAA"></div><div><label for="pPuesto">Puesto</label><input id="pPuesto"></div><div><label for="pEmail">Correo electrónico</label><input id="pEmail" type="email"></div><div><label for="pRegime">Régimen laboral</label><select id="pRegime"><option value="CAS (D. Leg. 1057)">CAS (D. Leg. 1057)</option><option value="Nombrado (D. Leg. 276)">Nombrado (D. Leg. 276)</option><option value="Locador / tercero">Locador / tercero</option></select></div><div><label for="pArea">Área / equipo</label><select id="pArea"><option>ESST / Primer piso</option><option>Salud Ocupacional</option><option>Servicio Médico y Odontológico</option></select></div></div><div class="actions"><button id="savePerson">Guardar integrante</button><button id="cancelPerson" class="secondary">Cancelar</button><button id="deletePerson" class="danger hidden">Eliminar integrante</button></div><div class="status" id="editorStatus"></div></div>
+
+</section>
+<section id="backupsFooter" class="panel" style="padding:12px 18px;margin-top:28px"><details><summary style="font-size:12px;color:#64748b;cursor:pointer">Respaldo y restauración (JSON)</summary><p class="help" style="margin-top:10px">Exporta un respaldo antes de cambiar de archivo o limpiar datos del navegador. La importación reemplaza únicamente los datos del módulo correspondiente.</p><div class="actions" style="margin-top:8px"><button id="exportar" class="secondary" style="font-size:11px;padding:7px 10px">Exportar Documental</button><button id="importarBtn" class="outline" style="font-size:11px;padding:7px 10px">Importar Documental</button><input id="importar" type="file" accept=".json,application/json" class="hidden"><button id="exportPeople" class="secondary" style="font-size:11px;padding:7px 10px">Exportar Personal</button><button id="importPeopleBtn" class="outline" style="font-size:11px;padding:7px 10px">Importar Personal</button><input id="importPeople" type="file" accept=".json,application/json" class="hidden"></div></details></section></main><footer>PULSAR Documental · Aplicación HTML local, sin API ni pagos · Compatible con Google Chrome</footer>
+<script>
+(()=>{'use strict';
+const KEY='pulsar_documental_v1';
+const defaults={rules:'Redacta en español con estilo institucional MINSA: formal, profesional, amable, claro, ordenado y relativamente breve. No inventes información, números de documentos, fechas, nombres, normas, antecedentes ni conclusiones. Si faltan datos, usa [corchetes]. Evita redacción excesivamente jurídica, repeticiones y párrafos innecesariamente largos. Resume fielmente y con brevedad las conclusiones de informes especializados, sin alterar su sentido. Incluye asunto y referencia únicamente cuando corresponda.',templates:[{id:'nota',name:'Nota Informativa',text:'Inicia con: «Tengo el agrado de dirigirme a usted para saludarle cordialmente y, a su vez, dar atención al documento de la referencia a), mediante el cual [indicar quién solicita y qué solicita]». Adapta «saludarlo/saludarla» según corresponda. En un segundo párrafo utiliza «Al respecto, se informa que...» e incorpora las indicaciones proporcionadas. Cuando corresponda, solicita que el expediente sea trasladado a la dirección competente para su atención. Cierra con «Es cuanto informo para su conocimiento y fines pertinentes». Ajusta las fórmulas a la situación y no afirmes hechos no indicados.'},{id:'memo',name:'Memorando',text:'Redacta un memorando institucional claro, con asunto breve, referencia cuando corresponda, antecedentes esenciales, comunicación o requerimiento concreto y cierre amable. Distingue entre informar, disponer y solicitar; no añadas competencias o compromisos no proporcionados.'},{id:'oficio',name:'Oficio',text:'Redacta un oficio institucional de tono formal y cordial dirigido a la entidad o destinatario indicado. Presenta brevemente la referencia, expón con precisión el pedido, propósito y fechas solo si se han proporcionado, y utiliza un cierre protocolar apropiado.'},{id:'informe',name:'Informe',text:'Redacta un informe administrativo con asunto, antecedentes, análisis breve y conclusiones/recomendaciones solo cuando los datos proporcionados permitan sustentarlas. No crees opiniones técnicas, normas ni resultados inexistentes.'},{id:'memo-multiple',name:'Memorando Múltiple',text:'Redacta un memorando múltiple de lenguaje formal, dirigido a todos los destinatarios indicados. Explica en forma breve el motivo, la acción requerida y los plazos solo si fueron dados. Evita inventar obligaciones.'}],texts:[{id:'t1',name:'Cierre de remisión',content:'Se remite el presente expediente para su conocimiento y fines pertinentes.'},{id:'t2',name:'Atención en competencias',content:'Se solicita trasladar el presente expediente para su atención en el marco de sus competencias.'}]};
+const $=id=>document.getElementById(id), clone=x=>JSON.parse(JSON.stringify(x));let data;
+try{const saved=JSON.parse(localStorage.getItem(KEY));data=saved&&Array.isArray(saved.templates)&&Array.isArray(saved.texts)&&typeof saved.rules==='string'?saved:clone(defaults)}catch{data=clone(defaults)}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch{alert('No fue posible guardar. Comprueba que Chrome permita el almacenamiento local y exporta un respaldo.');return false}};
+const flash=(id,msg)=>{$(id).textContent=msg};
+function populate(){const selected=$('tipo').value;$('tipo').replaceChildren(...data.templates.map(t=>new Option(t.name,t.id)));if(data.templates.some(t=>t.id===selected))$('tipo').value=selected;const selectedText=$('textoSelect').value;$('textoSelect').replaceChildren(new Option('Ninguno',''),...data.texts.map(t=>new Option(t.name,t.id)));$('textoSelect').value=data.texts.some(t=>t.id===selectedText)?selectedText:'';const psel=$('plantillaSelect').value;$('plantillaSelect').replaceChildren(...data.templates.map(t=>new Option(t.name,t.id)));if(data.templates.some(t=>t.id===psel))$('plantillaSelect').value=psel;loadTemplate();renderTexts()}
+function loadTemplate(){const t=data.templates.find(t=>t.id===$('plantillaSelect').value);$('plantillaNombre').value=t?.name||'';$('plantillaTexto').value=t?.text||''}
+function gen(){const type=data.templates.find(t=>t.id===$('tipo').value);const dest=$('destino').value==='Otra'?$('otra').value.trim():$('destino').value;const picked=data.texts.find(t=>t.id===$('textoSelect').value);const val=id=>$(id).value.trim()||'[No proporcionado]';const map={breve:'breve y directa',media:'moderada',detallada:'detallada'};
+$('resultado').value=`Actúa como especialista administrativo del Equipo de Seguridad y Salud en el Trabajo (ESST) del MINSA. Elabora un proyecto de ${type?.name||'[tipo de documento]'} dirigido a ${dest||'[oficina destinataria]'}.
+
+REGLAS GENERALES
+${data.rules}
+
+ESTRUCTURA E INSTRUCCIONES DEL DOCUMENTO
+${type?.text||'[Sin plantilla]'}
+
+DATOS PARA LA REDACCIÓN
+Asunto: ${val('asunto')}
+Referencia(s): ${val('referencia')}
+¿Quién solicita y qué solicita?: ${val('antecedente')}
+¿Qué se debe informar o solicitar?: ${val('indicaciones')}
+Extensión: ${map[$('tono').value]}.
+${picked?'\nTEXTO FRECUENTE SELECCIONADO\n'+picked.content+'\n':''}${$('adicional').value.trim()?'\nINDICACIONES ADICIONALES\n'+$('adicional').value.trim()+'\n':''}
+Entrega el proyecto completo listo para revisar, sin inventar datos faltantes. Mantén los marcadores [ ] donde falte información.`;
+$('resultadoWrap').classList.remove('hidden');$('contador').textContent=$('resultado').value.length+' caracteres';flash('estado','Prompt generado. Puedes editarlo antes de copiar.');$('resultado').scrollIntoView({behavior:'smooth',block:'nearest'})}
+function download(name,contents,mime){const blob=new Blob([contents],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+// Generador especializado: no altera las plantillas ni los campos del generador general.
+function espAlternar(){
+ const especialista=$('promptModo').value==='especialista';
+ $('promptEspecialista').classList.toggle('hidden',!especialista);
+ $('promptGeneral').classList.toggle('hidden',especialista);
+ $('resultadoWrap').classList.add('hidden');
+}
+$('promptModo').addEventListener('change',espAlternar);
+$('espTipoDoc').addEventListener('change',()=>{$('espOtroDocWrap').classList.toggle('hidden',$('espTipoDoc').value!=='otro')});
+$('espCargo').addEventListener('change',()=>{$('espOtroCargoWrap').classList.toggle('hidden',$('espCargo').value!=='otro')});
+const espPrevDocs=[];
+function espRenderPrev(){const box=$('espPrevLista');box.replaceChildren();if(!espPrevDocs.length){box.textContent='El primer documento agregado será la referencia principal.';return;}espPrevDocs.forEach((d,i)=>{const fila=document.createElement('div');fila.className='actions';fila.style.alignItems='center';const t=document.createElement('span');t.textContent=`${String.fromCharCode(97+i)}) ${d.tipo} ${d.numero}${i===0?' — Principal':''}`;const del=document.createElement('button');del.type='button';del.className='danger';del.textContent='Quitar';del.addEventListener('click',()=>{espPrevDocs.splice(i,1);espRenderPrev()});fila.append(t,del);box.append(fila)})}
+$('espPrevio').addEventListener('change',()=>{$('espPrevioWrap').classList.toggle('hidden',!$('espPrevio').checked)});
+$('espPrevTipo').addEventListener('change',()=>{$('espPrevOtroWrap').classList.toggle('hidden',$('espPrevTipo').value!=='otro')});
+$('espPrevAgregar').addEventListener('click',()=>{const tipo=$('espPrevTipo').value==='otro'?$('espPrevOtro').value.trim():$('espPrevTipo').value;const numero=$('espPrevNumero').value.trim();if(!tipo||!numero){alert('Completa el tipo y el número del documento previo.');return}espPrevDocs.push({tipo,numero});$('espPrevNumero').value='';espRenderPrev()});
+espRenderPrev();
+$('espGenerar').addEventListener('click',()=>{
+ const tipo=$('espTipoDoc').value==='otro'?$('espOtroDoc').value.trim():$('espTipoDoc').value;
+ const cargo=$('espCargo').value==='otro'?$('espOtroCargo').value.trim():$('espCargo').value;
+ const numero=$('espNumeroDoc').value.trim();const oficina=$('espOficina').value.trim();
+ const titulo=[tipo||'[TIPO DE DOCUMENTO]',numero||'[NÚMERO DE DOCUMENTO]'].join(' ');
+ const destino=oficina||'[OFICINA DESTINATARIA FINAL]';
+ const base=`Actúa como especialista administrativo del Equipo de Seguridad y Salud en el Trabajo (ESST) del Ministerio de Salud. Redacta una Nota Informativa del ESST dirigida a la ODRH, con estilo institucional, formal, profesional, amable, claro y preciso. No inventes datos.\n\n`;
+ const reglas=`\n\nREGLAS DE REDACCIÓN:\n- Analiza íntegramente los documentos adjuntos y distingue lo solicitado en el antecedente de lo informado o concluido por el especialista.\n- Sintetiza únicamente lo relevante para el trámite, de forma clara y precisa. No copies párrafos extensos ni agregues interpretaciones, conclusiones o solicitudes que no estén sustentadas en los documentos.\n- No inventes nombres, fechas, números, unidades orgánicas, competencias ni conclusiones. Si falta información, señala [Por completar].\n- Respeta la estructura solicitada y utiliza fórmulas naturales, sin repeticiones.\n- Entrega únicamente el proyecto de Nota Informativa, salvo que debas advertir una inconsistencia documental importante.`;
+ if($('espPrevio').checked){
+  const prev=espPrevDocs.length?espPrevDocs:[{tipo:'[TIPO DE DOCUMENTO PREVIO]',numero:'[NÚMERO DE DOCUMENTO PREVIO]'}];
+  const refs=prev.map((d,i)=>`${String.fromCharCode(97+i)}) ${d.tipo} ${d.numero}`).join('\n');
+  const principal=`${prev[0].tipo} ${prev[0].numero}`;
+  $('resultado').value=base+`Este expediente ES UNA RESPUESTA A DOCUMENTO PREVIO. Adjuntaré a ChatGPT tanto el documento o documentos antecedentes como el documento de respuesta del especialista (${titulo}). No trates el informe del especialista como un trámite que surge de cero.\n\nREFERENCIAS (la primera es la principal):\n${refs}\nDocumento del especialista: ${titulo}.\nCargo que emite la respuesta: ${cargo||'[CARGO DEL ESPECIALISTA]'}.\nDestino final del expediente: ${destino}.\n\nPrimero identifica en el documento previo quién lo emitió, qué órgano o unidad orgánica lo remite y qué solicita concretamente. Luego analiza el documento del especialista e identifica cómo responde a ese pedido: qué informa, qué concluye y qué solicita, únicamente si realmente lo solicita. Si el destino final indicado por el usuario no coincide con la naturaleza del pedido, no cambies el destino por tu cuenta; advierte la diferencia.\n\nRedacta la Nota Informativa con esta estructura:\n\nPrimer párrafo:\n«Tengo el agrado de dirigirme a usted para saludarla cordialmente y, a su vez, dar atención al documento de la referencia a), ${principal}, mediante el cual [IDENTIFICAR CARGO Y ÓRGANO QUE EMITE EL DOCUMENTO PREVIO Y SINTETIZAR QUÉ SOLICITA]».\n\nSegundo párrafo:\n«Al respecto, se remite el ${titulo}, mediante el cual ${cargo||'[CARGO DEL ESPECIALISTA]'} [RESUMIR FIELMENTE QUÉ INFORMA, CONCLUYE O SOLICITA EN RESPUESTA AL ANTECEDENTE]».\n\nTercer párrafo:\n«En ese sentido, se solicita trasladar el presente expediente a ${destino}, para su conocimiento y fines pertinentes».\n\nCierre:\n«Sin otro particular, quedo de usted.\n\nAtentamente,»`+reglas;
+ }else{
+  $('resultado').value=base+`Analiza cuidadosamente el documento del especialista que adjunto y redacta la Nota Informativa mediante la cual se remite el ${titulo}, emitido por ${cargo||'[CARGO DEL ESPECIALISTA]'}.\n\nPrimero, identifica en el documento adjunto qué informa, expone o comunica el especialista, cuál es su pedido principal y qué atención requiere. Sintetiza únicamente lo relevante para el trámite, de forma, clara y precisa. No copies párrafos extensos del informe ni agregues interpretaciones, conclusiones o solicitudes que no estén sustentadas en él.\n\nPrimer párrafo:\n«Tengo el agrado de dirigirme a usted para saludarla cordialmente y, a su vez, remitir el ${titulo}, mediante el cual [IDENTIFICAR AL ESPECIALISTA Y RESUMIR QUÉ INFORMA, EXPONE O SOLICITA]».\n\nSegundo párrafo:\n«En ese sentido, se solicita trasladar el presente expediente a ${destino}, para su atención en el marco de sus competencias».\n\nCierre:\n«Sin otro particular, quedo de usted.\n\nAtentamente,»`+reglas;
+ }
+ $('resultadoWrap').classList.remove('hidden');$('contador').textContent=$('resultado').value.length+' caracteres';flash('estado','Prompt generado. Adjunta los documentos en ChatGPT al utilizarlo.');$('resultado').scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+$('espLimpiar').addEventListener('click',()=>{['espNumeroDoc','espOtroDoc','espOtroCargo','espOficina'].forEach(id=>$(id).value='');$('espTipoDoc').selectedIndex=0;$('espCargo').selectedIndex=0;$('espOtroDocWrap').classList.add('hidden');$('espOtroCargoWrap').classList.add('hidden');$('resultadoWrap').classList.add('hidden');$('espPrevio').checked=false;$('espPrevioWrap').classList.add('hidden');espPrevDocs.length=0;espRenderPrev();$('espPrevNumero').value='';$('espPrevOtro').value=''});
+espAlternar();
+
+$('destino').addEventListener('change',()=>$('otraWrap').classList.toggle('hidden',$('destino').value!=='Otra'));
+$('generarBtn').addEventListener('click',gen);$('resultado').addEventListener('input',()=>$('contador').textContent=$('resultado').value.length+' caracteres');
+$('copiarBtn').addEventListener('click',async()=>{const txt=$('resultado').value;try{await navigator.clipboard.writeText(txt);flash('estado','Copiado al portapapeles. Pégalo en ChatGPT.')}catch{$('resultado').focus();$('resultado').select();try{if(document.execCommand('copy'))flash('estado','Copiado al portapapeles.');else throw Error()}catch{flash('estado','Selecciona el texto y presiona Ctrl + C.')}}});
+$('descargarBtn').addEventListener('click',()=>download('PULSAR_prompt.txt',$('resultado').value,'text/plain;charset=utf-8'));
+$('limpiarBtn').addEventListener('click',()=>{for(const id of ['asunto','referencia','antecedente','indicaciones','adicional','otra'])$(id).value='';$('textoSelect').value='';$('resultadoWrap').classList.add('hidden');flash('estado','')});
+$('plantillaSelect').addEventListener('change',loadTemplate);
+$('guardarPlantilla').addEventListener('click',()=>{const t=data.templates.find(t=>t.id===$('plantillaSelect').value),name=$('plantillaNombre').value.trim();if(!t||!name){flash('plantillaEstado','Indica el nombre de la plantilla.');return}t.name=name;t.text=$('plantillaTexto').value;if(save()){populate();flash('plantillaEstado','Plantilla guardada.')}});
+$('nuevaPlantilla').addEventListener('click',()=>{const name=prompt('Nombre de la nueva plantilla:');if(!name||!name.trim())return;const id='p'+Date.now();data.templates.push({id,name:name.trim(),text:'Redacta con estilo institucional, sin inventar datos.'});if(save()){populate();$('plantillaSelect').value=id;loadTemplate();flash('plantillaEstado','Nueva plantilla creada. Edita sus instrucciones y guárdalas.')}});
+$('eliminarPlantilla').addEventListener('click',()=>{if(data.templates.length===1){flash('plantillaEstado','Debes conservar al menos una plantilla.');return}if(!confirm('¿Eliminar esta plantilla?'))return;data.templates=data.templates.filter(t=>t.id!==$('plantillaSelect').value);if(save()){populate();flash('plantillaEstado','Plantilla eliminada.')}});
+let editingText=null;function renderTexts(){const out=$('listadoTextos');out.replaceChildren();for(const t of data.texts){const item=document.createElement('div');item.className='library-item';const title=document.createElement('strong');title.textContent=t.name;const body=document.createElement('p');body.textContent=t.content;const actions=document.createElement('div');actions.className='actions';const edit=document.createElement('button');edit.className='secondary';edit.textContent='Editar';edit.addEventListener('click',()=>{editingText=t.id;$('textoNombre').value=t.name;$('textoContenido').value=t.content;$('textoNombre').focus()});const del=document.createElement('button');del.className='danger';del.textContent='Eliminar';del.addEventListener('click',()=>{if(!confirm('¿Eliminar este texto?'))return;data.texts=data.texts.filter(x=>x.id!==t.id);if(editingText===t.id)clearText();if(save())populate()});actions.append(edit,del);item.append(title,body,actions);out.append(item)}}function clearText(){editingText=null;$('textoNombre').value='';$('textoContenido').value=''}
+$('guardarTexto').addEventListener('click',()=>{const name=$('textoNombre').value.trim(),content=$('textoContenido').value.trim();if(!name||!content){flash('textoEstado','Completa el nombre y el contenido.');return}if(editingText){const t=data.texts.find(t=>t.id===editingText);if(t)Object.assign(t,{name,content})}else data.texts.push({id:'t'+Date.now(),name,content});if(save()){clearText();populate();flash('textoEstado','Texto guardado.')}});$('cancelarTexto').addEventListener('click',clearText);
+$('guardarReglas').addEventListener('click',()=>{data.rules=$('reglas').value;if(save())flash('configEstado','Reglas guardadas.')});
+$('exportar').addEventListener('click',()=>{download('PULSAR_respaldo_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:1,...data},null,2),'application/json;charset=utf-8');flash('configEstado','Respaldo descargado.')});$('importarBtn').addEventListener('click',()=>$('importar').click());
+$('importar').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>2e6)throw Error('Archivo demasiado grande.');const parsed=JSON.parse(await file.text());if(!parsed||!Array.isArray(parsed.templates)||!parsed.templates.length||!Array.isArray(parsed.texts)||typeof parsed.rules!=='string'||parsed.templates.some(t=>typeof t.id!=='string'||typeof t.name!=='string'||typeof t.text!=='string')||parsed.texts.some(t=>typeof t.id!=='string'||typeof t.name!=='string'||typeof t.content!=='string'))throw Error('Formato de respaldo no válido.');if(!confirm('La importación reemplazará tus plantillas y textos actuales. ¿Continuar?'))return;data={rules:parsed.rules,templates:parsed.templates,texts:parsed.texts};if(save()){populate();$('reglas').value=data.rules;flash('configEstado','Respaldo importado correctamente.')}}catch(err){flash('configEstado',err.message)}finally{e.target.value=''}});
+document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===btn));for(const id of ['redaccion','generar','plantillas','textos'])$(id).classList.toggle('hidden',id!==btn.dataset.tab)}));
+$('reglas').value=data.rules;populate();})();
+</script>
+<script>
+(()=>{'use strict';
+const STORE='pulsar_personal_v1';
+const defaults=[];
+const $=id=>document.getElementById(id);
+const clone=x=>JSON.parse(JSON.stringify(x));
+let people;
+try{const saved=JSON.parse(localStorage.getItem(STORE));people=Array.isArray(saved)&&saved.every(x=>x&&typeof x.name==='string'&&typeof x.email==='string')?saved:clone(defaults)}catch{people=clone(defaults)}
+// Migra el campo nuevo sin alterar nombres, DNI ni ediciones guardadas previamente.
+people=people.map(p=>({...p,birth:p.birth||'(Por completar)'}));
+let editId=null;
+const persist=()=>{try{localStorage.setItem(STORE,JSON.stringify(people));return true}catch{alert('No se pudo guardar. Exporta tu respaldo y revisa los permisos del navegador.');return false}};
+const status=(id,msg)=>$(id).textContent=msg;
+const isServer=p=>!String(p.regime||'').toLowerCase().includes('locador')&&!String(p.regime||'').toLowerCase().includes('tercero');
+function node(t,cls,content){const el=document.createElement(t);if(cls)el.className=cls;if(content!==undefined)el.textContent=content;return el}
+function render(){const q=$('personSearch').value.toLocaleLowerCase(),area=$('personAreaFilter').value;const found=people.filter(p=>(area==='todos'||p.area===area)&&[p.name,p.dni,p.puesto,p.email,p.regime,p.area,p.birth].join(' ').toLocaleLowerCase().includes(q));const tb=$('peopleRows');tb.replaceChildren();for(const p of found){const tr=node('tr');const tdName=node('td','',p.name);const tdDni=node('td','',p.dni?('••••'+String(p.dni).slice(-4)):'—');const tdBirth=node('td','',p.birth||'(Por completar)');const tdJob=node('td','',p.puesto);const tdReg=node('td');tdReg.append(node('span','tag',p.regime));const tdArea=node('td','',p.area);const tdEmail=node('td');const link=node('a','',p.email);link.href='mailto:'+encodeURIComponent(p.email).replace('%40','@');tdEmail.append(link);const tdAction=node('td');const edit=node('button','secondary','Editar');edit.addEventListener('click',()=>startEdit(p.id));tdAction.append(edit);tr.append(tdName,tdDni,tdBirth,tdJob,tdReg,tdArea,tdEmail,tdAction);tb.append(tr)}if(!found.length){const tr=node('tr'),td=node('td','muted','Sin registros para esta búsqueda');td.colSpan=8;tr.append(td);tb.append(tr)}$('personStats').replaceChildren(...[['Total',people.length],['Servidores',people.filter(isServer).length],['Locadores',people.filter(p=>!isServer(p)).length],['Mostrados',found.length]].map(([k,v])=>{const x=node('span');x.append(node('strong','',String(v)),document.createTextNode(' '+k));return x}));}
+function selectEmails(pop,area){const seen=new Set();return people.filter(p=>(pop==='total'||(pop==='servers'?isServer(p):!isServer(p)))&&(area==='todos'||p.area===area)).map(p=>String(p.email||'').trim()).filter(x=>{if(!/^[^\s@;]+@[^\s@;]+\.[^\s@;]+$/.test(x)||seen.has(x.toLowerCase()))return false;seen.add(x.toLowerCase());return true})}
+function generate(pop=$('mailPopulation').value,area=$('mailArea').value){
+ const mails=selectEmails(pop,area),groups=$('mailGroups');groups.replaceChildren();$('mailOutput').value=mails.join('; ');
+ for(let i=0;i<mails.length;i+=15){const batch=mails.slice(i,i+15);const card=node('div','library-item');const heading=node('strong','',`Grupo ${Math.floor(i/15)+1} · ${batch.length} destinatario(s)`);const input=node('textarea');input.value=batch.join('; ');input.style.minHeight='85px';input.setAttribute('aria-label',heading.textContent+' (editable)');const btn=node('button','secondary','Copiar para Outlook');btn.addEventListener('click',async()=>{const ok=await copyText(input.value,input);status('mailStatus',ok?`Grupo ${Math.floor(i/15)+1} copiado. Pégalo en Outlook.`:'Selecciona el grupo y presiona Ctrl+C.')});const actions=node('div','actions');actions.append(btn);card.append(heading,input,actions);groups.append(card)}
+ $('mailCount').textContent=mails.length+' destinatario(s) · '+Math.ceil(mails.length/15)+' grupo(s) de hasta 15';
+ status('mailStatus',mails.length?'Grupos listos para copiar a Outlook. Cada bloque corresponde a un correo separado.':'No hay correos válidos para los filtros seleccionados.');return mails
+}
+async function copyText(txt,ta){try{await navigator.clipboard.writeText(txt);return true}catch{ta.focus();ta.select();try{return document.execCommand('copy')}catch{return false}}}
+function startEdit(id){editId=id;const p=people.find(p=>p.id===id);$('editorTitle').textContent=p?'Editar integrante':'Agregar integrante';for(const [el,key] of [['pName','name'],['pDni','dni'],['pBirth','birth'],['pPuesto','puesto'],['pEmail','email'],['pRegime','regime'],['pArea','area']])$(el).value=p?p[key]||'':(key==='regime'?'CAS (D. Leg. 1057)':key==='area'?'ESST / Primer piso':'');$('deletePerson').classList.toggle('hidden',!p);$('personEditor').classList.remove('hidden');status('editorStatus','');$('personEditor').scrollIntoView({behavior:'smooth',block:'nearest'})}
+function stopEdit(){editId=null;$('personEditor').classList.add('hidden')}
+$('addPerson').addEventListener('click',()=>startEdit(null));$('cancelPerson').addEventListener('click',stopEdit);
+$('savePerson').addEventListener('click',()=>{const vals={name:$('pName').value.trim(),dni:$('pDni').value.trim(),birth:$('pBirth').value.trim()||'(Por completar)',puesto:$('pPuesto').value.trim(),email:$('pEmail').value.trim(),regime:$('pRegime').value,area:$('pArea').value};if(!vals.name||!vals.email||!/^[^\s@;]+@[^\s@;]+\.[^\s@;]+$/.test(vals.email)){status('editorStatus','Es obligatorio indicar nombre y correo válido.');return}const before=clone(people);if(editId){const i=people.findIndex(x=>x.id===editId);if(i<0)return;people[i]={...people[i],...vals}}else people.push({id:'p'+Date.now(),...vals});if(persist()){render();generate();stopEdit();status('peopleStatus','Registro guardado.')}else people=before});
+$('deletePerson').addEventListener('click',()=>{if(!editId||!confirm('¿Eliminar este integrante del directorio?'))return;const before=clone(people);people=people.filter(p=>p.id!==editId);if(persist()){render();generate();stopEdit();status('peopleStatus','Registro eliminado.')}else people=before});
+$('personSearch').addEventListener('input',render);$('personAreaFilter').addEventListener('change',render);$('generateMails').addEventListener('click',()=>generate());$('mailPopulation').addEventListener('change',()=>generate());$('mailArea').addEventListener('change',()=>generate());
+
+function download(text,name){const blob=new Blob([text],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=node('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$('exportPeople').addEventListener('click',()=>{download(JSON.stringify({version:1,source:'PULSAR Personal ESST',people},null,2),'PULSAR_personal_respaldo_'+new Date().toISOString().slice(0,10)+'.json');status('peopleStatus','Respaldo del personal descargado.')});
+$('importPeopleBtn').addEventListener('click',()=>$('importPeople').click());$('importPeople').addEventListener('change',async e=>{try{const f=e.target.files?.[0];if(!f)return;if(f.size>3000000)throw Error('Archivo demasiado grande.');const x=JSON.parse(await f.text());if(!Array.isArray(x.people)||x.people.some(p=>!p||typeof p.id!=='string'||typeof p.name!=='string'||typeof p.email!=='string'||typeof p.regime!=='string'||typeof p.area!=='string'))throw Error('No es un respaldo válido de personal ESST.');if(!confirm('Se reemplazará el directorio de personal. ¿Continuar?'))return;const old=people;people=x.people;if(!persist()){people=old;return}render();generate();status('peopleStatus','Directorio restaurado.')}catch(err){status('peopleStatus',err.message)}finally{e.target.value=''}});
+// Exportador XLSX independiente y sin librerias de red: celdas de texto para conservar los ceros del DNI.
+const columns=[['Nombre y apellidos','name'],['DNI','dni'],['Fecha de nacimiento','birth'],['Puesto','puesto'],['Régimen laboral','regime'],['Área','area'],['Correo electrónico','email']];
+const xmlEscape=x=>String(x??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+function crc32(bytes){let c=~0;for(const b of bytes){c^=b;for(let j=0;j<8;j++)c=(c>>>1)^(-(c&1)&0xedb88320)}return (~c)>>>0}
+function zipStore(entries){const enc=new TextEncoder(),parts=[],central=[];let off=0;const u16=(view,o,n)=>view.setUint16(o,n,true),u32=(view,o,n)=>view.setUint32(o,n>>>0,true);
+ for(const [name,text] of entries){const n=enc.encode(name),d=enc.encode(text),crc=crc32(d),h=new Uint8Array(30+n.length),v=new DataView(h.buffer);u32(v,0,0x04034b50);u16(v,4,20);u16(v,6,0);u16(v,8,0);u32(v,14,crc);u32(v,18,d.length);u32(v,22,d.length);u16(v,26,n.length);h.set(n,30);parts.push(h,d);
+ const cd=new Uint8Array(46+n.length),cv=new DataView(cd.buffer);u32(cv,0,0x02014b50);u16(cv,4,20);u16(cv,6,20);u32(cv,16,crc);u32(cv,20,d.length);u32(cv,24,d.length);u16(cv,28,n.length);u32(cv,42,off);cd.set(n,46);central.push(cd);off+=h.length+d.length}
+ const cdOff=off,cdLen=central.reduce((a,b)=>a+b.length,0),end=new Uint8Array(22),ev=new DataView(end.buffer);u32(ev,0,0x06054b50);u16(ev,8,entries.length);u16(ev,10,entries.length);u32(ev,12,cdLen);u32(ev,16,cdOff);return new Blob([...parts,...central,end],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
+const xlCol=i=>{let s='';for(i++;i;i=Math.floor((i-1)/26))s=String.fromCharCode(65+(i-1)%26)+s;return s};
+function exportXlsx(){const rows=[columns.map(x=>x[0]),...people.map(p=>columns.map(([,key])=>String(p[key]??'')))];let sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
+ rows.forEach((r,i)=>{sheet+=`<row r="${i+1}">`;r.forEach((x,j)=>{sheet+=`<c r="${xlCol(j)}${i+1}" t="inlineStr"><is><t>${xmlEscape(x)}</t></is></c>`});sheet+='</row>'});sheet+='</sheetData></worksheet>';
+ const entries=[['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>'],['_rels/.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],['xl/workbook.xml','<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Personal ESST" sheetId="1" r:id="rId1"/></sheets></workbook>'],['xl/_rels/workbook.xml.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>'],['xl/worksheets/sheet1.xml',sheet]];
+ const url=URL.createObjectURL(zipStore(entries)),a=node('a');a.href=url;a.download='PULSAR_Personal_ESST_'+new Date().toISOString().slice(0,10)+'.xlsx';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);status('peopleStatus','Directorio Excel exportado.')}
+async function unzipXlsx(buffer){const dv=new DataView(buffer),bytes=new Uint8Array(buffer),decoder=new TextDecoder(),files={};let end=-1;for(let i=bytes.length-22;i>=Math.max(0,bytes.length-65557);i--){if(dv.getUint32(i,true)===0x06054b50){end=i;break}}if(end<0)throw Error('Archivo XLSX no válido.');let pos=dv.getUint32(end+16,true),count=dv.getUint16(end+10,true);
+ for(let i=0;i<count;i++){if(dv.getUint32(pos,true)!==0x02014b50)throw Error('Directorio ZIP inválido.');const method=dv.getUint16(pos+10,true),size=dv.getUint32(pos+20,true),nl=dv.getUint16(pos+28,true),el=dv.getUint16(pos+30,true),cl=dv.getUint16(pos+32,true),loc=dv.getUint32(pos+42,true),name=decoder.decode(bytes.slice(pos+46,pos+46+nl));const start=loc+30+dv.getUint16(loc+26,true)+dv.getUint16(loc+28,true);let raw=bytes.slice(start,start+size);
+ if(method===8){if(typeof DecompressionStream==='undefined')throw Error('Chrome no permite leer este Excel comprimido.');const stream=new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'));raw=new Uint8Array(await new Response(stream).arrayBuffer())}else if(method!==0)throw Error('Compresión de Excel no admitida.');files[name]=raw;pos+=46+nl+el+cl}return files}
+function parseCsv(text){const rows=[],re=/\r\n|\n|\r/;let row=[],s='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){s+='"';i++}else quoted=!quoted}else if(!quoted&&(c===','||c===';'||c==='\n'||c==='\r')){row.push(s);s='';if(c==='\n'||c==='\r'){if(row.some(x=>x.trim()))rows.push(row);row=[];if(c==='\r'&&text[i+1]==='\n')i++}}else s+=c}row.push(s);if(row.some(x=>x.trim()))rows.push(row);return rows}
+function importRows(rows){if(!rows.length)throw Error('El Excel no contiene filas.');const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');const header=rows.findIndex(r=>r.some(c=>['dni','ndni','numerodedni'].includes(norm(c)))&&r.some(c=>norm(c).includes('nombre')));if(header<0)throw Error('No se reconocen las columnas Nombre y DNI. Exporta un Excel desde PULSAR para usar el formato correcto.');const indices=columns.map(([label])=>rows[header].findIndex(c=>norm(c)===norm(label)));const dniCol=rows[header].findIndex(c=>['dni','ndni','numerodedni'].includes(norm(c)));indices[1]=dniCol;if(indices[0]<0)throw Error('Falta la columna de nombres.');let added=0,updated=0,skipped=0;const next=clone(people);
+ for(const r of rows.slice(header+1)){const record={};columns.forEach(([,key],i)=>{record[key]=indices[i]<0?'':String(r[indices[i]]??'').trim()});const dni=record.dni.replace(/\D/g,'').padStart(8,'0');if(!/^\d{8}$/.test(dni)||!record.name){skipped++;continue}record.dni=dni;const ex=next.find(p=>String(p.dni||'').replace(/\D/g,'').padStart(8,'0')===dni);if(ex){for(const [key,v] of Object.entries(record)){if(v&&v!=='(Por completar)')ex[key]=v}updated++}else{next.push({id:'p'+Date.now()+'_'+added,...record,birth:record.birth||'(Por completar)'});added++}}
+ if(!added&&!updated)throw Error('No se encontraron registros válidos con DNI.');if(!confirm(`Importar Excel: ${added} nuevos, ${updated} coincidencias por DNI, ${skipped} filas omitidas. Solo los campos no vacíos actualizarán registros existentes. ¿Continuar?`))return;const before=people;people=next;if(persist()){render();generate();status('peopleStatus',`Importación completada: ${added} nuevos, ${updated} actualizados, ${skipped} omitidos.`)}else people=before}
+async function importXlsx(file){if(file.size>10*1024*1024)throw Error('Excel demasiado grande (máximo 10 MB).');if(file.name.toLowerCase().endsWith('.csv'))return importRows(parseCsv((await file.text()).replace(/^\uFEFF/,'')));
+ const files=await unzipXlsx(await file.arrayBuffer()),xml=s=>new DOMParser().parseFromString(new TextDecoder().decode(files[s]),'application/xml');if(!files['xl/workbook.xml'])throw Error('No se encontró un libro de Excel.');const wb=xml('xl/workbook.xml'),ns='http://schemas.openxmlformats.org/spreadsheetml/2006/main';const sheetName='xl/worksheets/sheet1.xml';if(!files[sheetName])throw Error('No se encuentra la primera hoja.');const strings=files['xl/sharedStrings.xml']?Array.from(xml('xl/sharedStrings.xml').getElementsByTagNameNS(ns,'si'),si=>Array.from(si.getElementsByTagNameNS(ns,'t'),t=>t.textContent).join('')):[];const doc=xml(sheetName),rows=[];
+ for(const r of doc.getElementsByTagNameNS(ns,'row')){const vals=[];for(const c of r.getElementsByTagNameNS(ns,'c')){const ref=c.getAttribute('r')||'',letters=(ref.match(/^[A-Z]+/)||[])[0]||'A';let col=0;for(const ch of letters)col=col*26+ch.charCodeAt(0)-64;col--;const raw=c.getElementsByTagNameNS(ns,'v')[0]?.textContent||'';let value=c.getAttribute('t')==='s'?strings[+raw]||'':c.getAttribute('t')==='inlineStr'?Array.from(c.getElementsByTagNameNS(ns,'t'),t=>t.textContent).join(''):raw;vals[col]=value}rows.push(vals)}importRows(rows)}
+$('exportExcelBtn').addEventListener('click',exportXlsx);$('importExcelBtn').addEventListener('click',()=>$('importExcelFile').click());$('importExcelFile').addEventListener('change',async e=>{try{const f=e.target.files?.[0];if(f)await importXlsx(f)}catch(ex){status('peopleStatus',ex.message)}finally{e.target.value=''}});
+
+document.querySelectorAll('[data-module]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-module]').forEach(b=>b.classList.toggle('active',b===btn));for(const module of ['documental','correo','archivo','personal','configuracion'])$('mod-'+module).classList.toggle('hidden',btn.dataset.module!==module)}));
+render();generate();
+})();
+</script>
+
+<script>
+/* Vista programación: personalización de textos aislada de la lógica de PULSAR */
+(()=>{'use strict';
+const STORE='pulsar_visual_texts_v1';
+const $=id=>document.getElementById(id);
+const excluded=['#pulsarVisualEditor','#peopleRows','#personStats','#mailGroups','#mailCount','#mailStatus','#peopleStatus','#listadoTextos','#resultadoWrap','#personEditor','#editorStatus','#configEstado','#plantillaEstado','#textoEstado'];
+const ignored=(e)=>excluded.some(sel=>e.closest(sel))||!!e.closest('script,style,svg,template,[aria-live],.status,.counter')||e.tagName==='INPUT'||e.tagName==='TEXTAREA';
+const registry=new Map();const custom=(()=>{try{const x=JSON.parse(localStorage.getItem(STORE));return x&&typeof x==='object'&&!Array.isArray(x)?x:{}}catch{return {}}})();
+let active=null,programming=false;
+function section(e){if(e.closest('#mod-documental'))return 'documental';if(e.closest('#mod-correo'))return 'correo';if(e.closest('#mod-archivo'))return 'general';if(e.closest('#mod-configuracion'))return 'configuracion';if(e.closest('#mod-personal'))return 'personal';if(e.closest('#backupsFooter'))return 'respaldo';return 'general'}
+function cat(e,kind){if(kind==='placeholder')return 'Ejemplo';if(e.tagName==='BUTTON')return 'Botón';if(e.tagName==='LABEL'||e.tagName==='TH')return 'Campo';if(e.tagName==='OPTION')return 'Opción';if(e.classList.contains('help')||e.tagName==='SMALL'||e.tagName==='P')return 'Ayuda';return 'Texto'}
+function register(e,kind,node,index){const sec=section(e);const group=sec==='general'?'General y menú':sec==='documental'?'Documental':sec==='personal'?'Personal SCT':sec==='correo'?'Correo':sec==='configuracion'?'Configuración':'Respaldos';const type=cat(e,kind);const original=kind==='placeholder'?e.getAttribute('placeholder'):kind==='option'?e.textContent:node.nodeValue;
+ if(!original||!original.trim())return;
+ const key='e'+registry.size;const label=original.trim().replace(/\s+/g,' ');const obj={key,e,kind,node,index,original,sec,group,type,label};registry.set(key,obj);
+ // Los elementos editables se marcan sin cambiar su función ni su contenido original.
+ if(!e.dataset.pulsarEditKeys)e.dataset.pulsarEditKeys=key;else e.dataset.pulsarEditKeys+=' '+key;
+ if(Object.hasOwn(custom,key))apply(obj,custom[key]);
+}
+function apply(item,value){if(item.kind==='placeholder')item.e.setAttribute('placeholder',value);else if(item.kind==='option')item.e.textContent=value;else item.node.nodeValue=value}
+function discover(){const root=document.querySelector('body');const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT);const els=[];while(walker.nextNode())els.push(walker.currentNode);
+ for(const el of els){if(ignored(el))continue;if(el.hasAttribute('placeholder'))register(el,'placeholder',null,0);
+ if(el.tagName==='OPTION'){if(el.closest('#tipo,#textoSelect,#plantillaSelect'))continue;register(el,'option',null,0);continue}
+ if(el.tagName==='SELECT')continue;
+ let i=0;for(const node of el.childNodes){if(node.nodeType===Node.TEXT_NODE&&node.nodeValue.trim()){register(el,'text',node,i)}if(node.nodeType===Node.TEXT_NODE)i++}
+ }
+}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(custom));return true}catch{$('editorStatus').textContent='No se pudo guardar. Revisa el almacenamiento local.';return false}}
+function list(){const q=$('editorSearch').value.trim().toLocaleLowerCase('es');const sec=$('editorModule').value;const typ=$('editorType').value;const out=$('editorList');out.replaceChildren();let n=0;
+ for(const x of registry.values()){if(sec!=='todos'&&x.sec!==sec||typ!=='todos'&&x.type!==typ)continue;const display=(Object.hasOwn(custom,x.key)?custom[x.key]:x.original).replace(/\s+/g,' ').trim();if(q&&!`${display} ${x.original} ${x.type} ${x.group}`.toLocaleLowerCase('es').includes(q))continue;n++;
+ const b=document.createElement('button');b.type='button';b.className='editor-row'+(active===x.key?' selected':'');const box=document.createElement('span');box.style.minWidth='0';const t=document.createElement('span');t.textContent=display.slice(0,125)||(display?'':'(Texto vacío)');const m=document.createElement('span');m.className='editor-meta';m.textContent=`${x.group} · ${x.type} · ${x.e.tagName.toLowerCase()}`;box.append(t,m);b.append(box);if(Object.hasOwn(custom,x.key)){const edit=document.createElement('span');edit.className='edited-indicator';edit.textContent='● Editado';b.append(edit)}b.onclick=()=>select(x.key,true);out.append(b)}$('editorCount').textContent=n+' elementos encontrados';}
+function select(key,scroll){const x=registry.get(key);if(!x)return;active=key;$('editorNoSelection').classList.add('hidden');$('editorSelectedPanel').classList.remove('hidden');$('editorSelectedTitle').textContent=x.group+' · '+x.type;$('editorSelectedInfo').textContent=x.e.tagName.toLowerCase()+(x.e.id?' #'+x.e.id:'')+' · Identificador '+x.key;$('editorOriginal').value=x.original;$('editorNewText').value=Object.hasOwn(custom,key)?custom[key]:x.original;
+ document.querySelectorAll('.editor-focus').forEach(e=>e.classList.remove('editor-focus'));x.e.classList.add('editor-focus');list();if(scroll){const btn=$('editorList').querySelector('.selected');btn?.scrollIntoView({block:'nearest'});}}
+function toggle(on){programming=on;document.body.classList.toggle('pulsar-programming',on);$('pulsarVisualEditor').classList.toggle('hidden',!on);$('viewModeName').textContent=on?'Vista programación':'Vista final';$('viewModeToggle').setAttribute('aria-expanded',String(on));for(const x of registry.values())x.e.classList.toggle('editor-target',on);if(!on){document.querySelectorAll('.editor-focus').forEach(e=>e.classList.remove('editor-focus'))}else{list();$('pulsarVisualEditor').scrollIntoView({block:'start',behavior:'smooth'})}}
+$('viewModeToggle').addEventListener('click',()=>toggle(!programming));$('editorClose').addEventListener('click',()=>toggle(false));
+for(const id of ['editorSearch','editorModule','editorType'])$(id).addEventListener(id==='editorSearch'?'input':'change',list);
+$('editorSave').addEventListener('click',()=>{const x=registry.get(active);if(!x)return;const text=$('editorNewText').value;if(!text.trim()){ $('editorStatus').textContent='El texto no puede estar completamente vacío. Usa restaurar para recuperar el original.';return}custom[x.key]=text;if(persist()){apply(x,text);$('editorStatus').textContent='Texto guardado y aplicado. La función del elemento permanece intacta.';list()}});
+$('editorReset').addEventListener('click',()=>{const x=registry.get(active);if(!x)return;delete custom[x.key];persist();apply(x,x.original);select(x.key,false);$('editorStatus').textContent='Texto original restaurado.'});
+$('editorResetAll').addEventListener('click',()=>{if(!confirm('¿Restaurar TODOS los textos personalizados de la interfaz? No se borrarán los datos del directorio ni las plantillas.'))return;for(const k of Object.keys(custom))delete custom[k];persist();for(const x of registry.values())apply(x,x.original);if(active)select(active,false);list();$('editorStatus').textContent='Textos originales restaurados.'});
+function downloadJson(name,data){const u=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200)}
+$('editorExport').addEventListener('click',()=>downloadJson('PULSAR_textos_personalizados.json',{app:'PULSAR',kind:'visual-texts',version:1,changes:custom}));
+$('editorImportBtn').addEventListener('click',()=>$('editorImportFile').click());$('editorImportFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{if(f.size>1000000)throw Error('El archivo es demasiado grande.');const v=JSON.parse(await f.text());if(v.kind!=='visual-texts'||!v.changes||typeof v.changes!=='object'||Array.isArray(v.changes)||Object.values(v.changes).some(x=>typeof x!=='string'))throw Error('Archivo incompatible.');if(!confirm('¿Importar personalizaciones? Los textos existentes con el mismo identificador se actualizarán.'))return;for(const [k,val] of Object.entries(v.changes))if(registry.has(k)&&val.trim())custom[k]=val;if(persist()){for(const x of registry.values())apply(x,Object.hasOwn(custom,x.key)?custom[x.key]:x.original);list();$('editorStatus').textContent='Personalizaciones importadas.'}}catch(err){$('editorStatus').textContent=err.message}finally{e.target.value=''}});
+// En vista programación, capturar clics solo para textos registrados, nunca modificar listeners del sistema.
+document.addEventListener('click',e=>{if(!programming||e.target.closest('#pulsarVisualEditor,#viewModeToggle'))return;const el=e.target.closest('[data-pulsar-edit-keys]');if(!el)return;const key=el.dataset.pulsarEditKeys?.split(' ')[0];if(!registry.has(key))return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();select(key,true);$('pulsarVisualEditor').scrollIntoView({block:'start',behavior:'smooth'});},true);
+discover();
+})();
+</script>
+<script id="correoPlantillasScript">
+(()=>{'use strict';
+const K='pulsar_correo_plantillas_v1';
+const initial=[{id:'conocimiento-esst',name:'Conocimiento ESST',text:'Buenos días:\n\nSe adjunta el XXXX para su conocimiento y fines pertinentes.\n\nSaludos cordiales'},{id:'consulta-dm',name:'Consulta DM',text:'Estimada Gladys:\n\nBuenos días, por medio del presente, agradeceré se sirva brindar información sobre los descansos médicos registrados durante el presente año [del servidor NOMBRE COMPLETO], a fin de dar atención a lo solicitado mediante el documento de la referencia.\n\nSaludos cordiales.'},{id:'prestaciones',name:'Prestaciones',text:'Buenos días:\n\nSe remite la licencia por enfermedad correspondiente [SERVIDOR(A)] [NOMBRE DEL SERVIDOR] de condición laboral [CONDICION LABORAL] de la [OFICINA], la cual ha sido revisada y se encuentra conforme. Asimismo, se informa que dicha licencia ha sido reportada a la Oficina de Ingreso y Escalafón.\n\nEn ese sentido, se remite la documentación a su despacho para la continuación del trámite correspondiente.\n\nSaludos cordiales'},{id:'papeleta-vacaciones',name:'Papeleta / Vacaciones',text:'Estimado/a [DESTINATARIO]:\n\nBuenos días, adjunto [CANTIDAD Y DOCUMENTO] [DEL SERVIDOR O SERVIDORA] [NOMBRE] para el trámite correspondiente.\n\nSaludos cordiales.'}];
+const el=id=>document.getElementById(id);
+let templates;
+try{const saved=JSON.parse(localStorage.getItem(K));templates=Array.isArray(saved)&&saved.every(t=>t&&typeof t.id==='string'&&typeof t.name==='string'&&typeof t.text==='string')?saved:structuredClone(initial)}catch{templates=structuredClone(initial)}
+// Incorporar nuevas plantillas predeterminadas sin sobrescribir las personalizaciones existentes.
+const missing=initial.filter(base=>!templates.some(saved=>saved.id===base.id || saved.name.trim().toUpperCase()===base.name.toUpperCase()));
+if(missing.length){templates.push(...structuredClone(missing));try{localStorage.setItem(K,JSON.stringify(templates))}catch{ /* Los textos siguen disponibles durante esta sesión; el botón Guardar ofrece un aviso. */ }}
+for(const t of templates){if(t.id==='consulta-dm')t.name='Consulta DM'}
+let selected='conocimiento-esst';
+function status(t){el('correoEstado').textContent=t}
+function persist(){try{localStorage.setItem(K,JSON.stringify(templates));return true}catch{status('No se pudo guardar. Exporta un respaldo y comprueba el almacenamiento de Chrome.');return false}}
+function load(){const t=templates.find(t=>t.id===selected);el('correoMensaje').value=t?.text||'';el('correoDatosDocumento').classList.toggle('hidden',selected!=='conocimiento-esst');el('correoDatosConsulta').classList.toggle('hidden',selected!=='consulta-dm');el('correoDatosPrestaciones').classList.toggle('hidden',selected!=='prestaciones');el('correoDatosPapeleta').classList.toggle('hidden',selected!=='papeleta-vacaciones');if(selected==='papeleta-vacaciones')refreshPapNombres()}
+function refresh(){const sel=el('correoPlantilla');sel.replaceChildren(...templates.map(t=>new Option(t.name,t.id)));if(!templates.some(t=>t.id===selected))selected=templates[0]?.id||'';sel.value=selected;load()}
+el('correoPlantilla').addEventListener('change',e=>{selected=e.target.value;load();status('')});
+el('correoRestablecer').addEventListener('click',()=>{load();status('Texto restaurado desde la plantilla original, sin modificar los campos.');});
+el('correoNueva').addEventListener('click',()=>{const name=prompt('Nombre de la nueva plantilla:');if(!name?.trim())return;const item={id:'correo-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),name:name.trim(),text:''};templates.push(item);selected=item.id;if(!persist()){templates.pop();return}refresh();el('correoMensaje').focus();status('Plantilla creada. Los cambios de su texto se guardan automáticamente.')});
+// Las plantillas personalizadas se conservan editables y se guardan automáticamente,
+// mientras que generar un correo no modifica el modelo original.
+el('correoMensaje').addEventListener('input',()=>{const item=templates.find(t=>t.id===selected);if(item&&item.id.startsWith('correo-')){item.text=el('correoMensaje').value;persist()}});
+// La generación no modifica la plantilla guardada: produce una copia editable del mensaje.
+el('correoGenerar').addEventListener('click',()=>{
+ const item=templates.find(t=>t.id===selected);if(!item||item.id!=='conocimiento-esst')return;
+ const tipo=el('correoTipoDocumento');const option=tipo.selectedOptions[0];const numero=el('correoNumeroDocumento').value.trim();
+ if(!tipo.value||!numero){status('Selecciona el tipo de documento e ingresa su número.');return}
+ const articulo=option.dataset.articulo||'el';
+ const referencia=articulo+' '+tipo.value+' N.° '+numero;
+ // Para no duplicar artículos, sustituimos «el XXXX» en el original.
+ let base=item.text;
+ if(/\bel\s+XXXX\b/i.test(base))base=base.replace(/\bel\s+XXXX\b/i,referencia);
+ else if(/\bXXXX\b/i.test(base))base=base.replace(/\bXXXX\b/i,referencia);
+ else {status('Esta plantilla no contiene el marcador XXXX. Agrégalo en el texto guardado para poder generar.');return}
+ el('correoMensaje').value=base;status('Correo generado. Revisa el texto y pulsa Copiar para Outlook.');
+});
+// CONSULTA DM usa el modelo guardado y solo sustituye el marcador del servidor.
+el('correoGenerarConsulta').addEventListener('click',()=>{
+ const item=templates.find(t=>t.id===selected);if(!item||item.id!=='consulta-dm')return;
+ const genero=el('correoTratamiento').value;
+ const nombre=el('correoNombreServidor').value.trim();
+ if(!nombre){status('Ingresa el nombre completo del servidor o servidora.');return}
+ const reemplazo=(genero==='servidora'?'de la servidora ':'del servidor ')+nombre;
+ const base=item.text;
+ const patron=/\[del servidor(?:a)?\s+NOMBRE COMPLETO\]/i;
+ if(!patron.test(base)){status('La plantilla no contiene el marcador [del servidor NOMBRE COMPLETO].');return}
+ el('correoMensaje').value=base.replace(patron,reemplazo);
+ status('Correo generado. Revisa el texto y pulsa Copiar para Outlook.');
+});
+el('prestGenerar').addEventListener('click',()=>{
+ const item=templates.find(t=>t.id===selected);if(!item||selected!=='prestaciones')return;
+ const genero=el('prestGenero').value, nombre=el('prestNombre').value.trim(),condicion=el('prestCondicion').value.trim(),oficina=el('prestOficina').value.trim();
+ if(!nombre||!condicion||!oficina){status('Completa nombre, condición laboral y oficina.');return}
+ let result=item.text.replace(/licencia por enfermedad/gi,el('prestLicencia').value).replace(/\[SERVIDOR\(A\)\]/gi,genero==='servidora'?'a la servidora':'al servidor').replace(/\[NOMBRE DEL SERVIDOR\]/gi,nombre).replace(/\[CONDICION LABORAL\]/gi,condicion).replace(/\[OFICINA\]/gi,oficina);
+ el('correoMensaje').value=result;status('Plantilla Prestaciones generada. Puedes editar y copiar el texto.');
+});
+// Directorio ESST existente: se utiliza como lista de sugerencias, no se modifica.
+function refreshPapNombres(){
+ const list=el('papNombres');list.replaceChildren();
+ let records=[];try{const stored=JSON.parse(localStorage.getItem('pulsar_personal_v1'));if(Array.isArray(stored))records=stored}catch{}
+ if(!records.length){const table=document.querySelectorAll('#peopleRows tr');for(const row of table){const cell=row.querySelector('td');if(cell)records.push({name:cell.textContent,regime:row.querySelectorAll('td')[4]?.textContent||''})}}
+ const selectedReg=el('papCondicion').value;
+ const names=new Set();
+ for(const p of records){const r=String(p.regime||'').toUpperCase();const matches=selectedReg==='CAS'?r.includes('CAS'):(r.includes('NOMBRAD')||r.includes('276'));
+  if(!matches)continue;const name=String(p.name||'').trim();if(name&&!names.has(name.toUpperCase())){names.add(name.toUpperCase());list.append(new Option(name,name))}}
+}
+el('papCondicion').addEventListener('change',()=>{el('papNombre').value='';refreshPapNombres()});
+const papNumeros=['','una','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte'];
+el('papGenerar').addEventListener('click',()=>{
+ if(selected!=='papeleta-vacaciones')return;
+ const n=Number(el('papCantidad').value);const nombre=el('papNombre').value.trim();
+ if(!Number.isInteger(n)||n<1||n>999){status('Indica una cantidad válida entre 01 y 999.');return}
+ if(!nombre){status('Selecciona o escribe el nombre completo.');return}
+ const cas=el('papCondicion').value==='CAS';const fem=el('papGenero').value==='servidora';
+ const saludo=cas?'Estimada Andrea:':'Estimado señor Cáceres:';
+ const numero=n<=20?papNumeros[n]:String(n).padStart(2,'0');
+ const documento=el('papTipo').value==='papeleta'?(n===1?'papeleta de autorización':'papeletas de autorización'):(n===1?'formato de solicitud de vacaciones':'formatos de solicitud de vacaciones');
+ const sujeto=fem?'de la servidora':'del servidor';
+ const cantidad=n===1?(el('papTipo').value==='papeleta'?'una':'un'):numero;
+ el('correoMensaje').value=`${saludo}\n\nBuenos días, adjunto ${cantidad} ${documento} ${sujeto} ${nombre} para el trámite correspondiente.\n\nSaludos cordiales.`;
+ status('Texto generado. Puedes revisarlo y utilizar Copiar para Outlook.');
+});
+el('correoCopiar').addEventListener('click',async()=>{const value=el('correoMensaje').value;if(!value){status('No hay texto para copiar.');return}try{await navigator.clipboard.writeText(value);status('Texto copiado. Ya puedes pegarlo en Outlook.')}catch{const field=el('correoMensaje');field.focus();field.select();try{if(!document.execCommand('copy'))throw Error('copy');status('Texto copiado. Ya puedes pegarlo en Outlook.')}catch{status('Selecciona el texto y presiona Ctrl + C para copiarlo.')}}});
+refresh();
+})();
+</script>
+<script id="redaccionInspeccionesScript">
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const tipo=$('redTipo'),modelo=$('redModelo'),org=$('redOrgano'),unidad=$('redUnidad'),out=$('redResultado');
+const textoBase=(organo,unidadOrg)=>{
+const articuloOrg=/^(oficina|dirección|unidad|secretaría|gerencia|subdirección)\b/i.test(organo)?'la':'el';
+const destino=unidadOrg?`en la ${unidadOrg} de ${articuloOrg} ${organo}`:`en ${articuloOrg} ${organo}`;
+return `Tengo el agrado de dirigirme a usted para saludarla y a su vez remitir el documento de la referencia, mediante el cual el Especialista de Seguridad y Salud en el Trabajo del equipo a mi cargo informa sobre la inspección preventiva realizada ${destino} del Ministerio de Salud.
+
+En ese sentido, se solicita trasladar el presente expediente a la Dirección en mención a fin de que tomen conocimiento sobre las precisiones finales vertidas para tomar las acciones correspondientes y estas sean informadas a la Oficina General de Gestión de Recursos Humanos (OGGRH), en un plazo de 20 días hábiles, para su posterior verificación como parte de la mejora continua del Sistema de Seguridad y Salud en el Trabajo.
+
+Sin otro particular, quedo de usted.
+
+Atentamente,`;
+};
+function update(){const isNota=tipo.value==='nota',isDM=tipo.value==='memorandum';const prev=modelo.value;modelo.replaceChildren(...(isNota?[new Option('Inspecciones','inspecciones')]:isDM?[new Option('Licencia por enfermedad / maternidad','licencia'),new Option('Ley N.° 30012','ley30012')]:[]));if([...modelo.options].some(o=>o.value===prev))modelo.value=prev;const isLic=isDM&&modelo.value==='licencia',isLey=isDM&&modelo.value==='ley30012';$('redInspecciones').classList.toggle('hidden',!isNota);$('redDescanso').classList.toggle('hidden',!isLic);$('redLey30012').classList.toggle('hidden',!isLey);$('redSinModelo').classList.toggle('hidden',isNota||isDM);$('redProyectoSeccion').classList.toggle('hidden',!isNota);modelo.disabled=!(isNota||isDM);$('redGenerar').disabled=!isNota;$('redGenerar').style.display=isDM?'none':'';$('redResultado').closest('section') && ($('redResultado').style.display=isDM?'none':'');$('redResultado').previousElementSibling.style.display=isDM?'none':'';$('redCopiar').style.display=isDM?'none':'';$('redRestaurar').style.display=isDM?'none':'';}
+tipo.addEventListener('change',update);modelo.addEventListener('change',()=>{const isDM=tipo.value==='memorandum';$('redDescanso').classList.toggle('hidden',!isDM||modelo.value!=='licencia');$('redLey30012').classList.toggle('hidden',!isDM||modelo.value!=='ley30012');});
+$('redGenerar').addEventListener('click',()=>{if(tipo.value!=='nota')return;if(!org.value.trim()){$('redEstado').textContent='Ingresa el órgano para generar el texto.';org.focus();return}out.value=textoBase(org.value.trim(),unidad.value.trim());$('redEstado').textContent='Texto generado. Puedes revisarlo, editarlo y copiarlo.'});
+$('redRestaurar').addEventListener('click',()=>{if(!out.value||confirm('¿Restablecer el texto generado? Se descartarán las ediciones manuales del resultado.')){out.value=tipo.value==='nota'&&org.value.trim()?textoBase(org.value.trim(),unidad.value.trim()):'';$('redEstado').textContent='Texto restablecido.'}});
+$('redCopiar').addEventListener('click',async()=>{if(!out.value.trim()){$('redEstado').textContent='Primero genera el texto.';return}try{await navigator.clipboard.writeText(out.value);$('redEstado').textContent='Texto copiado.'}catch{out.focus();out.select();try{document.execCommand('copy');$('redEstado').textContent='Texto seleccionado/copiadο; comprueba el portapapeles.'}catch{$('redEstado').textContent='Presiona Ctrl+C para copiar el texto seleccionado.'}}});
+update();
+})();
+</script><script id="redaccionProyectoInspeccionesScript">
+(()=>{'use strict';
+const $=id=>document.getElementById(id), directorioInicial=[];
+const STORE='pulsar_minsa_directorio_v1';
+let directorio;
+try {const saved=JSON.parse(localStorage.getItem(STORE));directorio=Array.isArray(saved)?saved:directorioInicial;}catch{directorio=directorioInicial;}
+let editIndex=-1;const status=$('redProyectoEstado'),refOut=$('redReferenciaResultado'),out=$('redProyectoResultado');
+const proyecto=$('redRequiereProyecto'),campos=$('redProyectoCampos'),cc=$('redConCopia'),lista=$('redCCLista');
+const opciones=['OGA','OGRH','ODRH','OGTI','ARH'];let referencias=[];
+function saveDir(){try{localStorage.setItem(STORE,JSON.stringify(directorio));return true}catch{alert('No se pudo guardar el directorio en Chrome.');return false;}}
+function parseCSV(text){
+ const rows=[];let row=[],field='',quoted=false;
+ text=String(text).replace(/^\uFEFF/,'');
+ for(let i=0;i<text.length;i++){
+  const c=text[i];if(quoted){if(c==='"'&&text[i+1]==='"'){field+='"';i++}else if(c==='"')quoted=false;else field+=c}
+  else if(c==='"')quoted=true;else if(c===','||c===';'){row.push(field);field=''}
+  else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(x=>x.trim()))rows.push(row);row=[];field=''}else field+=c;
+ }
+ row.push(field);if(row.some(x=>x.trim()))rows.push(row);
+ if(!rows.length)throw Error('El CSV está vacío.');
+ const headers=rows.shift().map(x=>x.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''));
+ return rows.map(values=>Object.fromEntries(['Oficina','Nombre','Cargo','Correo','Anexo'].map(k=>{
+  const aliases={Oficina:['oficina','organo','unidad organica'],Nombre:['nombre','nombres'],Cargo:['cargo'],Correo:['correo','email','correo electronico'],Anexo:['anexo','extension']}[k];
+  const n=headers.findIndex(h=>aliases.includes(h));return [k,n>=0?String(values[n]||'').trim():''];
+ })));
+}
+$('orgImportar').addEventListener('click',()=>$('orgImportarArchivo').click());
+$('orgImportarArchivo').addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ try{
+  if(file.size>3000000)throw Error('El archivo excede 3 MB.');
+  const txt=await file.text(),rows=file.name.toLowerCase().endsWith('.json')?JSON.parse(txt):parseCSV(txt);
+  if(!Array.isArray(rows)||!rows.length||rows.some(x=>!x||typeof x!=='object'||typeof x.Oficina!=='string'))throw Error('Formato inválido. Revisa las columnas Oficina, Nombre, Cargo, Correo y Anexo.');
+  const clean=rows.filter(x=>x.Oficina.trim()).map(x=>Object.fromEntries(['Oficina','Nombre','Cargo','Correo','Anexo'].map(k=>[k,String(x[k]||'').trim()])));
+  if(!clean.length)throw Error('No hay oficinas válidas.');
+  if(!confirm('¿Importar '+clean.length+' registros? Este proceso reemplazará el directorio de oficinas de este navegador.'))return;
+  directorio=clean;if(saveDir()){renderDir();syncOfficeOptions();$('orgEstado').textContent='Directorio importado: '+clean.length+' registros.';}
+ }catch(err){$('orgEstado').textContent='Error al importar: '+err.message}finally{e.target.value=''}
+});
+$('orgExportar').addEventListener('click',()=>{
+ const blob=new Blob([JSON.stringify(directorio,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='PULSAR_directorio_oficinas_privado.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ $('orgEstado').textContent='Respaldo privado exportado. No lo subas a GitHub.';
+});
+
+function syncOfficeOptions(){const dl=$('redOficinasOpciones');dl.replaceChildren();for(const o of [...new Set(directorio.map(x=>x.Oficina).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'))){const x=document.createElement('option');x.value=o;dl.append(x)}}
+function renderDir(){const term=$('orgBuscar').value.trim().toLocaleLowerCase('es');const tbody=$('orgFilas');tbody.replaceChildren();let num=0;
+for(let i=0;i<directorio.length;i++){const entry=directorio[i];if(!Object.values(entry).some(v=>String(v||'').toLocaleLowerCase('es').includes(term)))continue;num++;const tr=document.createElement('tr');for(const key of ['Oficina','Nombre','Cargo','Correo','Anexo']){const td=document.createElement('td');td.style.cssText='padding:8px;border-bottom:1px solid #e1e7ee;vertical-align:top';td.textContent=entry[key]||'';tr.append(td)}const td=document.createElement('td'),b=document.createElement('button');b.className='secondary';b.textContent='Editar';b.type='button';b.addEventListener('click',()=>edit(i));td.append(b);tr.append(td);tbody.append(tr)}$('orgContador').textContent=`${num} de ${directorio.length} registros`;syncOfficeOptions();}
+function edit(i){editIndex=i;const x=directorio[i]||{};for(const field of ['Oficina','Nombre','Cargo','Correo','Anexo'])$('org'+field).value=x[field]||'';$('orgFormulario').classList.remove('hidden');}
+$('orgNuevo').addEventListener('click',()=>edit(-1));$('orgCancelar').addEventListener('click',()=>$('orgFormulario').classList.add('hidden'));
+$('orgGuardar').addEventListener('click',()=>{const entry={};for(const f of ['Oficina','Nombre','Cargo','Correo','Anexo'])entry[f]=$('org'+f).value.trim();if(!entry.Oficina){$('orgEstado').textContent='Indica la oficina.';return}if(editIndex<0)directorio.push(entry);else directorio[editIndex]=entry;if(saveDir()){$('orgFormulario').classList.add('hidden');$('orgEstado').textContent='Registro guardado.';renderDir()}});
+$('orgBuscar').addEventListener('input',renderDir);
+document.querySelectorAll('[data-cfg]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-cfg]').forEach(x=>x.classList.toggle('active',x===b));for(const id of ['config','cfgDirectorioPanel'])$(id).classList.toggle('hidden',id!==b.dataset.cfg)}));
+const norm=s=>String(s||'').trim();
+function lookup(value){const x=norm(value).toLocaleLowerCase('es');return directorio.find(o=>norm(o.Oficina).toLocaleLowerCase('es')===x)}
+function personParts(value){const entry=lookup(value);return entry?[(entry.Nombre||'[Nombre por completar]').toLocaleUpperCase('es-PE'),(entry.Cargo||'[Cargo por completar]').toLocaleUpperCase('es-PE'),entry.Oficina.toLocaleUpperCase('es-PE')]:[(value||'[Por completar]').toLocaleUpperCase('es-PE'),'[CARGO POR COMPLETAR]','[OFICINA POR COMPLETAR]']}
+const escH=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function headerRows(label,value){const parts=personParts(value);return `<tr><td style="width:75px;vertical-align:top">${label}</td><td style="width:24px;vertical-align:top">:</td><td style="vertical-align:top"><strong>${escH(parts[0])}</strong><div>${escH(parts[1])}</div><div>${escH(parts[2])}</div></td></tr>`}
+function genHead(){
+ $('redEncabezadoResultado').innerHTML=`<table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:11pt;line-height:1.45;border:0"><tbody>${headerRows('A',$('redPara').value)}<tr><td colspan="3" style="height:14px"></td></tr>${headerRows('De',$('redDe').value)}</tbody></table>`;
+ status.textContent='Encabezado generado y listo para copiar a Word.';
+}
+$('redEncabezadoGenerar').addEventListener('click',genHead);
+async function copyValue(el,label){if(!el.value.trim()){status.textContent='No hay texto para copiar.';return}try{await navigator.clipboard.writeText(el.value);status.textContent=label+' copiado.'}catch{el.focus();el.select();try{document.execCommand('copy');status.textContent=label+' seleccionado. Si no se copió, presiona Ctrl+C.'}catch{status.textContent='Presiona Ctrl+C.'}}}
+// Word interpreta mejor una tabla sin bordes que una secuencia de espacios; también copiamos texto plano.
+$('redEncabezadoCopiar').addEventListener('click',async()=>{
+ const el=$('redEncabezadoResultado');if(!el.textContent.trim()){status.textContent='No hay encabezado para copiar.';return}
+ const html='<html><body>'+el.innerHTML+'</body></html>',plain=el.innerText;
+ try{if(navigator.clipboard?.write&&window.ClipboardItem){await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]);status.textContent='Encabezado copiado con formato para Word.';return}}catch(e){}
+ const range=document.createRange(),sel=window.getSelection();range.selectNodeContents(el);sel.removeAllRanges();sel.addRange(range);
+ try{if(document.execCommand('copy')){sel.removeAllRanges();status.textContent='Encabezado copiado.';return}}catch(e){}
+ status.textContent='Selecciona el encabezado y presiona Ctrl+C.';
+});
+$('redReferenciaCopiar').addEventListener('click',()=>copyValue(refOut,'Referencia'));
+function buildRefs(){return referencias.map((x,i)=>`${String.fromCharCode(97+i)}) ${x.type.toLocaleUpperCase('es-PE')} N.° ${x.num}`).join('\n')}
+function updateRefs(){refOut.value=buildRefs();status.textContent='Referencias actualizadas.'}
+function renderRefs(){const host=$('redReferenciasLista');host.replaceChildren();referencias.forEach((entry,i)=>{const row=document.createElement('div');row.className='library-item';row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:12px';const txt=document.createElement('span');txt.textContent=`${String.fromCharCode(97+i)}) ${entry.type} N.° ${entry.num}`;const b=document.createElement('button');b.className='danger';b.type='button';b.textContent='Quitar';b.addEventListener('click',()=>{referencias.splice(i,1);renderRefs();updateRefs()});row.append(txt,b);host.append(row)})}
+$('redRefAgregar').addEventListener('click',()=>{const num=norm($('redRefNumero').value);if(!num){status.textContent='Escribe el número de documento.';return}referencias.push({type:$('redRefTipo').value,num});$('redRefNumero').value='';renderRefs();updateRefs()});
+function addCC(){const row=document.createElement('div');row.className='actions';row.style.alignItems='center';const select=document.createElement('select');select.style.maxWidth='250px';select.setAttribute('aria-label','Dirección de la copia');for(const item of opciones)select.add(new Option(item,item));const b=document.createElement('button');b.type='button';b.className='danger';b.textContent='Quitar';b.addEventListener('click',()=>row.remove());row.append(select,b);lista.append(row)}
+function sync(){campos.classList.toggle('hidden',!proyecto.checked||$('redTipo').value!=='nota');$('redCCPanel').classList.toggle('hidden',!cc.checked)}
+proyecto.addEventListener('change',sync);$('redTipo').addEventListener('change',sync);cc.addEventListener('change',()=>{if(cc.checked&&!lista.children.length)addCC();sync()});$('redCCAgregar').addEventListener('click',addCC);
+function generate(){const org=norm($('redOrgano').value),un=norm($('redUnidad').value);if(!org){status.textContent='Completa primero el órgano de Inspecciones.';return}const dest=un?`la ${un} de la ${org}`:`la ${org}`;
+const refTxt=refOut.value.trim();const docLabel=referencias.length===1?`el ${referencias[0].type} N.° ${referencias[0].num}`:'los documentos indicados en la referencia';
+const init=`Tengo el agrado de dirigirme a usted para saludarlo cordialmente y, a su vez, remitir ${refTxt?docLabel:'[documento de la referencia]'}, mediante ${referencias.length===1?'el cual':'los cuales'} el Equipo de Seguridad y Salud en el Trabajo de la Oficina de Desarrollo de Recursos Humanos informa sobre la inspección realizada en ${dest} del Ministerio de Salud.`;
+const copies=[];if(cc.checked)for(const row of lista.children){const v=row.querySelector('select')?.value;if(v&&!copies.includes(v))copies.push(v)}
+out.value=`${init}\n\nEn ese sentido, se remite la documentación señalada para su conocimiento y a fin de que, en el marco de sus competencias, se adopten las acciones que correspondan respecto de las observaciones formuladas. Asimismo, se agradecerá informar a esta Oficina General sobre las medidas implementadas, a efectos de que el Equipo de Seguridad y Salud en el Trabajo efectúe la verificación correspondiente.\n\nSin otro particular, quedo de usted.\n\nAtentamente,${copies.length?'\n\nCC:\n'+copies.join('\n'):''}`.replace(/\\n/g,'\n');status.textContent='Cuerpo del proyecto generado.'}
+$('redProyectoGenerar').addEventListener('click',generate);
+$('redProyectoRestaurar').addEventListener('click',()=>{if(!confirm('¿Borrar los datos y textos del proyecto?'))return;for(const id of ['redPara','redDe','redRefNumero','redReferenciaResultado','redProyectoResultado'])$(id).value='';$('redEncabezadoResultado').innerHTML='';referencias=[];renderRefs();lista.replaceChildren();cc.checked=false;$('redCCPanel').classList.add('hidden');status.textContent='Proyecto borrado. Los datos de Inspecciones se conservaron.'});
+$('redProyectoCopiar').addEventListener('click',()=>copyValue(out,'Cuerpo del proyecto'));renderDir();sync();
+})();
+</script><script id="descansoMedicoScript">(()=>{'use strict';
+const $=id=>document.getElementById(id);const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const editor=$('dmResultado'),msg=$('dmEstado'),titulo=$('dmTituloResultado');
+$('dmGenerar').addEventListener('click',()=>{
+ const genero=$('dmGenero').value,nombre=$('dmNombre').value.trim(),condicion=$('dmCondicion').value.trim(),direccion=$('dmDireccion').value.trim(),licencia=$('dmLicencia').value.trim();
+ if(!nombre||!condicion||!direccion||!licencia){msg.textContent='Completa los cuatro campos de nombre, condición, dirección y licencia.';return}
+ const art=genero==='servidora'?'la servidora':'el servidor';
+ titulo.value=licencia.toLocaleUpperCase('es-PE')+' - '+nombre.toLocaleUpperCase('es-PE');
+ editor.innerHTML=`<p>Tengo el agrado de dirigirme a usted para saludarla cordialmente, y hacer de su conocimiento que ${art} <strong>${esc(nombre)}</strong> de condición laboral <strong>${esc(condicion.toLocaleUpperCase('es-PE'))}</strong> de la <strong>${esc(direccion)}</strong> del Ministerio de Salud, solicita <strong>${esc(licencia)}</strong> de acuerdo al siguiente detalle:</p>
+ <table><thead><tr><th>MÉDICO</th><th>N.° CMP</th><th>CITT/D/M</th><th>DÍAS</th><th>FECHAS</th></tr></thead><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table>
+ <p>Al respecto, se verificó que la documentación presentada por ${art} cumple con los requisitos establecidos en la circular N.° 088-2018-OGGRH-ODRH/MINSA, de conformidad con el Reglamento Interno de los Servidores Civiles de la Administración Central del Ministerio de Salud, aprobado por Resolución Ministerial N.° 650-2022/MINSA y el Procedimiento de Gestión de Descansos Médicos, aprobado por Resolución Directoral N.° D000746-2024-OGGRH-MINSA.</p>
+ <p>Por lo expuesto, en consideración a la Ley N.° 29733, Ley de Protección de Datos Personales y su Reglamento aprobado con Decreto Supremo N.° 003-2013-JUS, se remite el expediente en mención, para que prosiga su trámite por encontrarse viable.</p>
+ <p>Adicionalmente, cabe señalar que el presente documento cuenta con la revisión y conformidad del firmante, quien ejerce la jefatura del Equipo de Seguridad y Salud en el Trabajo, incluyendo al Servicio Médico que forma parte de dicho equipo.</p>
+ <p>Sin otro particular, quedo de usted.</p><p>Atentamente</p>`;
+ msg.textContent='Texto y tabla generados. Puedes editar la vista previa antes de copiar.';
+});
+$('dmLimpiar').addEventListener('click',()=>{editor.innerHTML='';titulo.value='';msg.textContent='Resultado y título limpiados.'});
+$('dmCopiarTitulo').addEventListener('click',async()=>{if(!titulo.value.trim()){msg.textContent='Primero genera el texto y la tabla.';return;}try{await navigator.clipboard.writeText(titulo.value);msg.textContent='Título copiado.'}catch{titulo.focus();titulo.select();try{if(!document.execCommand('copy'))throw Error();msg.textContent='Título copiado.'}catch{msg.textContent='Presiona Ctrl+C para copiar el título.'}}});
+$('dmCopiarWord').addEventListener('click',async()=>{
+ if(!editor.textContent.trim()){msg.textContent='Primero genera el texto y la tabla.';return}
+ const html='<html><body>'+editor.innerHTML+'</body></html>';
+ try{if(navigator.clipboard?.write&&window.ClipboardItem){await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([editor.innerText],{type:'text/plain'})})]);msg.textContent='Texto y tabla copiados. Pégalos en Word con Ctrl+V.';return}}catch(e){}
+ const selection=window.getSelection(),range=document.createRange();range.selectNodeContents(editor);selection.removeAllRanges();selection.addRange(range);
+ try{const ok=document.execCommand('copy');if(!ok)throw Error('copy');msg.textContent='Contenido copiado con formato. Pégalo en Word.';selection.removeAllRanges()}catch{msg.textContent='Contenido seleccionado: presiona Ctrl+C, luego pégalo en Word con Ctrl+V.'}
+});
+})();</script><script id="ley30012Script">(()=>{'use strict';
+const $=id=>document.getElementById(id), esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const originals=['CERO','UNO','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE','DIEZ','ONCE','DOCE','TRECE','CATORCE','QUINCE','DIECISÉIS','DIECISIETE','DIECIOCHO','DIECINUEVE','VEINTE'];
+function word(n){if(n<=20)return originals[n];if(n<30)return 'VEINTI'+(['','UNO','DÓS','TRÉS','CUATRO','CINCO','SÉIS','SIETE','OCHO','NUEVE'][n-20]||'');if(n<100){const d=['','','','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'][Math.floor(n/10)];return d+(n%10?' Y '+word(n%10):'')}return String(n)}
+function refreshOffices(){let raw;try{raw=JSON.parse(localStorage.getItem('pulsar_minsa_directorio_v1'))}catch{};if(!Array.isArray(raw)){const rows=$('orgFilas')?.querySelectorAll('tr');if(!rows?.length)return;raw=Array.from(rows).map(r=>({Oficina:r.querySelector('td')?.textContent||''}));}const dl=$('pulsarOficinas');if(!dl)return;const known=new Set();dl.replaceChildren();for(const item of raw){const off=String(item.Oficina||'').trim();if(off&&!known.has(off)){known.add(off);dl.append(new Option('',off))}}}
+for(const id of ['dmDireccion','leyOficina','prestOficina'])$(id).addEventListener('focus',refreshOffices);
+refreshOffices();
+const editor=$('leyResultado'),msg=$('leyEstado'),titulo=$('leyTituloResultado');
+$('leyGenerar').addEventListener('click',()=>{
+ const name=$('leyNombre').value.trim(),office=$('leyOficina').value.trim(),g=$('leyGenero').value,condition=$('leyCondicion').value,days=Number($('leyDias').value),date=$('leyFecha').value.trim();
+ if(!name||!office||!date||!Number.isInteger(days)||days<1||days>365){msg.textContent='Completa nombre, oficina, días (1 a 365) y fechas.';return}
+ const art=g==='servidora'?'la servidora':'el servidor';const number=String(days).padStart(2,'0');const officePrefix=/^(?:equipo|despacho|departamento|servicio|centro|instituto|hospital|órgano)/i.test(office)?'del':'de la';
+ titulo.value='SOLICITUD DE LICENCIA LEY 30012 - '+name.toLocaleUpperCase('es-PE');
+ editor.innerHTML=`<p>Tengo el agrado de dirigirme a usted para saludarla cordialmente, y a su vez hacer de su conocimiento que ${art} <strong>${esc(name)}</strong>, personal (<strong>${esc(condition.toLocaleUpperCase('es-PE'))}</strong>) ${officePrefix} <strong>${esc(office)}</strong>, solicita licencia por enfermedad de familiar directo según Ley N.° 30012; que concede el derecho de licencia a trabajadores/as con familiares directos que se encuentran con enfermedad en estado grave o terminal o sufren accidentes graves; por <strong>${word(days)} (${number}) días</strong> a partir del ${esc(date)} por enfermedad de su familiar conforme se detalla en cuadro resumen:</p>
+ <table><thead><tr><th>N.° Folios</th><th>Formato certificado Ley N.° 30012</th><th>Médico</th><th>CMP</th><th>Nombre del paciente</th><th>Diagnóstico califica como enfermedad grave</th><th>Necesita cuidados</th></tr></thead><tbody><tr>${'<td>&nbsp;</td>'.repeat(7)}</tr></tbody></table>
+ <p>Al respecto, se ha verificado la documentación presentada por ${art}, por lo cual sustenta lo solicitado, y de conformidad al artículo 2.° de la citada Ley y su Reglamento, se remite el expediente a su despacho, para que prosiga el trámite correspondiente.</p>
+ <p>Sin otro particular, quedo de usted.</p><p>Atentamente,</p>`;
+ msg.textContent='Documento y tabla generados. Revisa el resultado antes de copiar.';
+});
+$('leyLimpiar').addEventListener('click',()=>{editor.innerHTML='';titulo.value='';msg.textContent='Resultado y título limpiados.'});
+$('leyCopiarTitulo').addEventListener('click',async()=>{if(!titulo.value.trim()){msg.textContent='Genera primero el documento.';return}try{await navigator.clipboard.writeText(titulo.value);msg.textContent='Título copiado.'}catch{titulo.focus();titulo.select();try{if(!document.execCommand('copy'))throw Error();msg.textContent='Título copiado.'}catch{msg.textContent='Presiona Ctrl+C para copiar el título.'}}});
+$('leyCopiarWord').addEventListener('click',async()=>{if(!editor.textContent.trim()){msg.textContent='Genera primero el documento.';return}const html='<html><body>'+editor.innerHTML+'</body></html>';try{if(navigator.clipboard?.write&&window.ClipboardItem){await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([editor.innerText],{type:'text/plain'})})]);msg.textContent='Texto y tabla copiados para Word.';return}}catch{}const range=document.createRange(),sel=window.getSelection();range.selectNodeContents(editor);sel.removeAllRanges();sel.addRange(range);try{if(document.execCommand('copy')){sel.removeAllRanges();msg.textContent='Texto y tabla copiados para Word.';return}}catch{}msg.textContent='Presiona Ctrl+C con el contenido seleccionado.'});
+})();</script><script id="pulsarArchivoScript">
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const ROOT='1OBB9nBaLecaM0ubcVFiCHvA_mZPx-eWj'; // TDOCUMENTOS, dentro de la carpeta compartida por el usuario
+const LINK='https://drive.google.com/drive/folders/1cisIMkXh48Nlle41_rDPR5FlF6VPnwBm';
+const SCOPE='https://www.googleapis.com/auth/drive.readonly';
+const CACHEKEY='pulsar_drive_oauth_client_id_v1';
+let token='', tokenClient=null, busy=false;
+const status=message=>$('archivoEstado').textContent=message;
+const conn=message=>$('archivoConexionEstado').textContent=message;
+const result=$('archivoResultados');
+$('archivoAbrirCarpeta').addEventListener('click',()=>window.open(LINK,'_blank','noopener,noreferrer'));
+try{$('archivoClientId').value=localStorage.getItem(CACHEKEY)||''}catch{}
+function validOrigin(){return location.protocol==='https:' || (location.protocol==='http:' && ['localhost','127.0.0.1'].includes(location.hostname))}
+function loadGIS(){return new Promise((resolve,reject)=>{if(window.google?.accounts?.oauth2)return resolve();let el=document.querySelector('script[data-pulsar-gis]');if(el){el.addEventListener('load',resolve,{once:true});el.addEventListener('error',()=>reject(Error('No se pudo cargar la biblioteca de Google.')),{once:true});return}el=document.createElement('script');el.src='https://accounts.google.com/gsi/client';el.async=true;el.dataset.pulsarGis='1';el.onload=resolve;el.onerror=()=>reject(Error('No se pudo conectar con el servicio de Google. Verifica internet.'));document.head.appendChild(el)})}
+$('archivoConectar').addEventListener('click',async()=>{
+ if(!validOrigin()){conn('Abre PULSAR desde http://localhost:8000/PULSAR.html o una dirección HTTPS registrada en Google Cloud.');return}
+ const clientId=$('archivoClientId').value.trim();if(!/^[\w-]+\.apps\.googleusercontent\.com$/.test(clientId)){conn('Introduce un ID de cliente OAuth válido que termine en .apps.googleusercontent.com.');return}
+ $('archivoConectar').disabled=true;conn('Preparando autorización con Google...');
+ try{await loadGIS();try{localStorage.setItem(CACHEKEY,clientId)}catch{}
+  tokenClient=google.accounts.oauth2.initTokenClient({client_id:clientId,scope:SCOPE,callback:resp=>{
+   if(resp.error||!resp.access_token){conn('Autorización no completada: '+(resp.error_description||resp.error||'sin permiso'));return}
+   token=resp.access_token;conn('Conectado con Google Drive. Ya puedes buscar documentos.');status('Conexión establecida. Introduce una palabra y pulsa Buscar documentos.');
+  },error_callback:e=>conn('No se pudo completar la autorización: '+(e.type||'ventana cancelada o bloqueada'))});
+  tokenClient.requestAccessToken({prompt:'consent'});
+ }catch(e){conn('Error al conectar: '+e.message)}finally{$('archivoConectar').disabled=false}
+});
+$('archivoDesconectar').addEventListener('click',()=>{if(token && window.google?.accounts?.oauth2)google.accounts.oauth2.revoke(token,()=>{});token='';tokenClient=null;conn('Desconectado de Google Drive.');status('');result.replaceChildren();});
+async function api(q){const res=await fetch('https://www.googleapis.com/drive/v3/files?'+new URLSearchParams(q),{headers:{Authorization:'Bearer '+token}});
+ if(res.status===401){token='';conn('Sesión vencida. Vuelve a pulsar Conectar con Google Drive.');throw Error('La sesión expiró.')}
+ if(!res.ok){let m='HTTP '+res.status;try{const j=await res.json();m=j.error?.message||m}catch{}throw Error(m)}return res.json()}
+function escQ(s){return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}
+async function listAll(query,maxPages=80){let pageToken='',files=[],pages=0;do{
+ const params={q:query,pageSize:'1000',fields:'nextPageToken,files(id,name,mimeType,webViewLink,createdTime,modifiedTime,description,parents)',spaces:'drive',supportsAllDrives:'true',includeItemsFromAllDrives:'true'};
+ if(pageToken)params.pageToken=pageToken;
+ const data=await api(params);files.push(...(data.files||[]));pageToken=data.nextPageToken||'';pages++;
+ if(pages>=maxPages && pageToken)throw Error('Demasiados archivos para una búsqueda completa. Reduce el alcance o consulta al administrador.');
+}while(pageToken);return files}
+const folderMime='application/vnd.google-apps.folder';
+async function listTree(){const queue=[{id:ROOT,year:''}],seen=new Set(),folders=[],files=[];
+ while(queue.length){const current=queue.shift();if(seen.has(current.id))continue;seen.add(current.id);if(seen.size>300)throw Error('Se alcanzó el límite de 300 subcarpetas de esta versión.');
+  const children=await listAll("'"+escQ(current.id)+"' in parents and trashed = false");
+  for(const f of children){if(f.mimeType===folderMime){const year=/^20\d{2}$/.test(f.name)?f.name:current.year;queue.push({id:f.id,year});folders.push(f)}else files.push({...f,_year:current.year})}
+ }return files}
+function tipo(name){const n=name.toLocaleLowerCase('es-PE');if(n.includes('nota informativa'))return 'Nota Informativa';if(n.includes('memor'))return 'Memorándum';if(n.includes('oficio'))return 'Oficio';if(n.includes('informe'))return 'Informe';return 'Otro'}
+function itemFile(f){const item=document.createElement('div');item.className='library-item';const title=document.createElement('strong');title.textContent=f.name||'Documento sin nombre';const meta=document.createElement('p');meta.textContent=[f._year||'Sin año en carpeta',tipo(f.name||''),f.modifiedTime?'Modificado '+new Date(f.modifiedTime).toLocaleDateString('es-PE'):''].filter(Boolean).join(' · ');const a=document.createElement('a');a.href=f.webViewLink||'https://drive.google.com/file/d/'+encodeURIComponent(f.id)+'/view';a.target='_blank';a.rel='noopener noreferrer';a.textContent='Abrir en Google Drive ↗';a.style.color='#22558c';item.append(title,meta,a);return item}
+$('archivoBuscar').addEventListener('click',async()=>{
+ if(busy)return;if(!token){status('Primero conecta tu cuenta con Google Drive.');return}
+ busy=true;$('archivoBuscar').disabled=true;result.replaceChildren();
+ const phrase=$('archivoConsulta').value.trim(),year=$('archivoAnio').value,kind=$('archivoTipo').value;
+ status('Leyendo TDOCUMENTOS y sus subcarpetas. Puede tardar si hay muchos archivos...');
+ try{
+  const all=await listTree();const ids=new Set(all.map(f=>f.id));let matches=all;
+  if(phrase){status('Consultando el índice de Google Drive para buscar por nombre o contenido...');
+   // fullText contains matches file names, indexed content and other indexed metadata when available.
+   const q="trashed = false and (name contains '"+escQ(phrase)+"' or fullText contains '"+escQ(phrase)+"')";
+   const found=await listAll(q);const matchingIds=new Set(found.filter(f=>ids.has(f.id)).map(f=>f.id));
+   matches=all.filter(f=>matchingIds.has(f.id));
+  }
+  if(year)matches=matches.filter(f=>f._year===year);
+  if(kind)matches=matches.filter(f=>tipo(f.name||'')===kind);
+  matches.sort((a,b)=>(b.modifiedTime||'').localeCompare(a.modifiedTime||''));
+  const strong=document.createElement('strong');strong.textContent=matches.length+' resultado(s) en TDOCUMENTOS';result.append(strong);
+  if(!matches.length){const p=document.createElement('p');p.textContent='No se encontraron coincidencias. Prueba una palabra diferente o selecciona todos los años y tipos.';result.append(p)}
+  else{for(const f of matches.slice(0,200))result.append(itemFile(f));if(matches.length>200){const p=document.createElement('p');p.textContent='Se muestran los primeros 200 resultados. Precisa la búsqueda para ver otros documentos.';result.append(p)}}
+  status('Búsqueda terminada. Se revisaron '+all.length+' archivos de TDOCUMENTOS. Google Drive solo permite buscar contenido que tenga indexado; no es una búsqueda semántica ni OCR universal.');
+ }catch(e){const strong=document.createElement('strong');strong.textContent='No se completó la búsqueda';const p=document.createElement('p');p.textContent=e.message;result.append(strong,p);status('Revisa la conexión o los permisos de Drive.')}finally{busy=false;$('archivoBuscar').disabled=false}
+});
+$('archivoConsulta').addEventListener('keydown',e=>{if(e.key==='Enter')$('archivoBuscar').click()});
+$('archivoLimpiar').addEventListener('click',()=>{for(const id of ['archivoConsulta','archivoAnio','archivoTipo'])$(id).value='';status('Filtros limpiados. Pulsa Buscar documentos para ver todos los archivos.');});
+})();
+</script>
+</body></html>
